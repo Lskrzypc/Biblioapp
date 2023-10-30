@@ -6,7 +6,7 @@ import { ReactElement, ReactNode } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Library',
+  title: 'BiblioTech',
   description: 'Book management system',
 };
 
