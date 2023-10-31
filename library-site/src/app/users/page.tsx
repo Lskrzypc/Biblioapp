@@ -1,7 +1,7 @@
 'use client';
 import { FC, ReactElement, useEffect } from 'react';
 import { useUsersProviders } from '@/hooks';
-import {UserCard} from '@/components';
+import {UserCard, Header} from '@/components';
 
 const UsersPage: FC = (): ReactElement => {
     const { useListUsers } = useUsersProviders();
@@ -11,7 +11,7 @@ const UsersPage: FC = (): ReactElement => {
     
     return (
         <>
-        <h1>Users</h1>
+        <Header />
         {users.map((user) => (
             <div key={user.id}>{user.firstname}{user.lastname}</div>
         ))}
