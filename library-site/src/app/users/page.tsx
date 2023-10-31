@@ -12,6 +12,7 @@ const UsersPage: FC = (): ReactElement => {
     return (
         <>
         <Header />
+        <h1>Users</h1>
         {users.map((user) => (
             <div key={user.id}>{user.firstname}{user.lastname}</div>
         ))}
