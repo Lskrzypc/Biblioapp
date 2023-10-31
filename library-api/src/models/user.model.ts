@@ -1,5 +1,7 @@
+import { UserId } from 'library-api/src/entities';
+
 export interface UserModel {
-    id: string;
+    id: UserId;
     firstName: string;
     lastName: string;
   }
