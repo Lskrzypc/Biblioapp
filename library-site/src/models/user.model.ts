@@ -1,5 +1,5 @@
 export type PlainUserModel = {
     id: string;
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
     };
