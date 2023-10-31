@@ -13,7 +13,7 @@ const BooksPage: FC = (): ReactElement => {
   return (
     <>
       <Header />
-      <h1>Books</h1>
+      <h1>Books page</h1>
       {books.map((book) => (
         <div key={book.id}>{book.name}</div>
       ))}
