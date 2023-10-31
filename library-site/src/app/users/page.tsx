@@ -1,6 +1,7 @@
 'use client';
 import { FC, ReactElement, useEffect } from 'react';
 import { useUsersProviders } from '@/hooks';
+import {UserCard} from '@/components';
 
 const UsersPage: FC = (): ReactElement => {
     const { useListUsers } = useUsersProviders();
