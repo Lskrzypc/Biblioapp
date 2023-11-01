@@ -1,5 +1,9 @@
+// Desc: Header qui sera présent sur toutes les pages
+// Auteur: Louis SKRZYPCZAK
+
 import { FC, useState } from "react";
 
+// Redirections vers les différentes pages
 const handleLogOut = () => {
     window.location.href = "/";
     }
@@ -16,7 +20,6 @@ const goToUsers = () => {
     window.location.href = "/users";
     }
 
-
 export const Header: FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -26,15 +29,14 @@ export const Header: FC = () => {
 
   return (
     <div className="w-full h-16">
-      <div className="flex items-center justify-center h-full relative">
-        <button onClick={toggleMenu}>
-          <svg
-            className={`ml-6 hover:animate-bounce cursor-pointer ${isMenuOpen ? 'transform rotate-180' : ''}`} width="36px" height="36px" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12.32H22" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2 18.32H22" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2 6.32001H22" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
 
+      <div className="flex items-center justify-center h-full relative">
         
+        <button onClick={toggleMenu}><svg className={`ml-6 ease-in duration-300 cursor-pointer ${isMenuOpen ? 'transform rotate-180' : ''}`} width="36px" height="36px" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12.32H22" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2 18.32H22" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2 6.32001H22" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+
         {isMenuOpen && (
-          <div className="absolute top-16 left-0 w-full rounded-lg ">
-            <ul className="py-2 text-gray-project font-outfit font-semibold text-center cursor-pointer">
+          <div className="absolute top-16 left-0 w-full bg-rose-project">
+            <ul className="py-2 text-gray-project font-outfit font-semibold text-center text-white cursor-pointer">
               <li onClick={handleLogOut} className="px-4 py-2 hover:animate-bounce">Accueil</li>
               <li onClick={goToBooks} className="px-4 py-2 hover:animate-bounce">Les livres</li>
               <li onClick={goToAuthors} className="px-4 py-2 hover:animate-bounce">Auteurs</li>

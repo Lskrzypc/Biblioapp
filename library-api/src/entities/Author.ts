@@ -5,7 +5,8 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
-} from 'typeorm';
+} from 'typeorm'
+
 import { Book } from './Book';
 
 export type AuthorId = string & { __brand: 'Author' };

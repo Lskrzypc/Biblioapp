@@ -1,7 +1,7 @@
 'use client';
 import { FC, ReactElement, useEffect } from 'react';
 import { useUsersProviders } from '@/hooks';
-import {UserCard, Header} from '@/components';
+import {UserCard, Header, Title} from '@/components';
 
 const UsersPage: FC = (): ReactElement => {
     const { useListUsers } = useUsersProviders();
@@ -10,13 +10,10 @@ const UsersPage: FC = (): ReactElement => {
     useEffect(() => load, []);
     
     return (
-        <>
-        <Header />
-        <h1>Users</h1>
-        {users.map((user) => (
-            <div key={user.id}>{user.firstname}{user.lastname}</div>
-        ))}
-        </>
-    );
+        <div className="flex flex-col gap-y-10">
+          <Header />
+          <span className="pl-6"><Title content="Les utilisateurs" /></span>
+        </div>
+      );
 };
 export default UsersPage;
