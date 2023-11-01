@@ -76,5 +76,19 @@ export class AuthorRepository extends Repository<Author> {
 
     return this.getAuthorById(id);
   }
+  /**
+   * Delete an author
+   * @param id Author's ID of type AuthorId
+   * @returns Author deleted
+   * @throws Error if author not found
+   */
+  public async deleteAuthor(id: AuthorId): Promise<PlainAuthorRepositoryOutput> {//Changer la promesse si le front a besoin de changer
+    const author = await this.findOne({ where: { id } });
+    if (!author) throw new Error(`Author - '${id}'`);
+
+    await this.remove(author);
+    return adaptAuthorEntityToPlainAuthorModel(author);
+  }
+  
 
 }
