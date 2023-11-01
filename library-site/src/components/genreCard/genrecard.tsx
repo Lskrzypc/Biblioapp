@@ -2,25 +2,14 @@ import { FC } from 'react';
 
 type Genre = {
     name: string;
-  };
+};
 
 type GenreCardProps = {
     genre: Genre;
 };
 
 export const GenreCard: FC<GenreCardProps> = ({ genre }) => (
-    <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '258.4px',
-        height: '166px',
-        padding: '36px 57px',
-        borderRadius: '10px',
-        backgroundColor: 'rgba(206, 121, 107, 0.70)',
-        gap: '10px',
-        flexShrink: 0
-    }}>
-        <div style={{ color: '#333333' }}>{genre.name}</div>
+    <div className="flex justify-center items-center w-64 h-40 p-9 bg-rose-project bg-opacity-70 rounded-lg gap-2.5 flex-shrink-0">
+        <div className="text-gray-project">{genre.name}</div>
     </div>
 );
