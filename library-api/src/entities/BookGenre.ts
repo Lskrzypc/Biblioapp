@@ -5,6 +5,7 @@ import { Book } from './Book';
 
 export type BookGenreId = string & { __brand: 'BookGenre' };
 
+// BookGenre représente la relation entre un livre et un genre. C'est une table intermédiaire (de jointure), qui lie les books et les (leurs) genres.
 @Entity('BookGenres')
 export class BookGenre extends BaseEntity {
   @PrimaryColumn()
@@ -15,6 +16,7 @@ export class BookGenre extends BaseEntity {
   })
   book: Book;
 
+  // Un livre peut être associé à plusieurs genres
   @ManyToOne(() => Genre, (genre) => genre.bookGenres, {
     onDelete: 'CASCADE',
   })
