@@ -27,8 +27,3 @@ export class UpdateAuthorDto{
     photoUrl?: string;
 
 }
-
-export class DeleteAuthorDto{
-    @IsUUID()
-    id: string;
-}
