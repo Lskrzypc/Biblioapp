@@ -2,7 +2,7 @@ import { Controller, Get, Param, Post, Body, Patch, Delete} from '@nestjs/common
 import { AuthorPresenter, PlainAuthorPresenter } from './author.presenter';
 import { AuthorId } from 'library-api/src/entities';
 import { AuthorUseCases, BookUseCases } from 'library-api/src/useCases';
-import { CreateAuthorDto, UpdateAuthorDto, DeleteAuthorDto } from './author.dto';
+import { CreateAuthorDto, UpdateAuthorDto} from './author.dto';
 
 @Controller('authors')
 export class AuthorController {
