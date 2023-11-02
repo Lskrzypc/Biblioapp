@@ -47,7 +47,7 @@ export const Header: FC = () => {
 
         <span className="font-outfit text-gray-project font-semibold text-3xl w-full"><p className="text-center">BiblioTech</p></span>
 
-        <button><svg className="mr-4 hover:animate-bounce" onClick={handleLogOut} width="36px" height="36px" viewBox="0 0 24 24" fill="none"xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M19 5L5 19M5.00001 5L19 19" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></svg></button>
+        <button><svg className="mr-6 hover:animate-bounce" onClick={handleLogOut} width="36px" height="36px" viewBox="0 0 24 24" fill="none"xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M19 5L5 19M5.00001 5L19 19" stroke="#333333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></g></svg></button>
 
       </div>
     </div>

@@ -23,23 +23,24 @@ export class AuthorController {
     }
 
     @Post('/')
-  public async createAuthor(
+    public async createAuthor(
     @Body() input: CreateAuthorDto, // Ajout de l'annotation '@Body'
-  ): Promise<AuthorPresenter> {
+    ): Promise<AuthorPresenter> {
     return this.authorUseCases.createAuthor(input);
-  }
+    }
 
-  @Patch('/:id')
-  public async updateAuthor(
+    @Patch('/:id')
+    public async updateAuthor(
     @Body() input: UpdateAuthorDto,
-  ): Promise<AuthorPresenter> {
+    ): Promise<AuthorPresenter> {
     return this.authorUseCases.updateAuthor(input);
-  }
+    }
   
-  @Delete('/:id')
-  public async deleteAuthor(
+    @Delete('/:id')
+    public async deleteAuthor(
     @Param('id') id: AuthorId,
-  ): Promise<AuthorPresenter> {
+    ): Promise<AuthorPresenter> {
     return this.authorUseCases.deleteAuthor(id);
-  }
+    }
+    
 }

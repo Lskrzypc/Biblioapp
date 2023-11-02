@@ -3,12 +3,13 @@
 import React, {useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
-import { Header } from '@/components';
+import { Header, Title } from '@/components';
 
 interface AuthorModel {
   id: string;
   firstName: string;
   lastName: string;
+  photoUrl: string;
 }
 
 const AuthorDetailsPage: React.FC = () => {
@@ -29,13 +30,29 @@ const AuthorDetailsPage: React.FC = () => {
 
   return (
     <>
-      <Header />
       {author ? (
-        <div>
-          Nom : {author.firstName} {author.lastName}
+        <div className='flex flex-col gap-y-8'>
+
+          <div className='flex flex-col gap-y-10'>
+          
+            <Header />
+
+            <div className='w-full flex items-center justify-center'>
+              <img src={author.photoUrl} alt='' className='w-82 h-96 rounded-full object-cover'></img>
+            </div>
+
+          </div>
+
+          <span className="text-center"><Title content={author.firstName + ' ' + author.lastName} /></span>
+
+
         </div>
+
+
+
+
       ) : (
-        <p>Chargement des détails de l'auteur...</p>
+        <Title content="Chargement..." />
       )}
     </>
   );
