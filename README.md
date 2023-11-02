@@ -1,11 +1,11 @@
 # PROJET EXAMEN M1 
 
 # Auteurs : 
-- SKRZYPCZAK Louis
-- RENOUVIN--DELECOURT Alexandra
-- DJELALI Célia
-- LAFONT Arthur
-- COCHET Mélodie
+- SKRZYPCZAK Louis (As a full-stack developper)
+- RENOUVIN--DELECOURT Alexandra (Backend)
+- DJELALI Célia (Front-end)
+- LAFONT Arthur (Full-stack)
+- COCHET Mélodie (Front-end)
 
 ######################## 
 ##### COTE BACKEND #####

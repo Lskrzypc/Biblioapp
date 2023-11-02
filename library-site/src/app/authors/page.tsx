@@ -23,13 +23,22 @@ const AuthorsPage: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-y-10">
+
       <Header />
+
       <span className="pl-6"><Title content="Les Auteurs" /></span>
+
+      <div className="flex flex-wrap gap-x-10 gap-y-10 pl-6 pr-6">
+
       {authors.map(author => (
-        <div key={author.id}>
-          {author.firstName} {author.lastName}
+        <div className="w-80 h-20 flex items-center border-2 border-gray-project rounded-lg" key={author.id}>
+          <p className='font-outfit font-semibold text-gray-project pl-6 w-full text-left'>{author.firstName} {author.lastName}</p>
         </div>
       ))}
+
+
+      </div>
+
     </div>
   );
 };
