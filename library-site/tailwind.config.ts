@@ -20,6 +20,7 @@ const config: Config = {
         'gray-project': '#333333',
         'rose-project': '#CE796B',
         'black-project': '#534D56',
+        'green-project': '#5B8C5A',
       },
     },
   },
