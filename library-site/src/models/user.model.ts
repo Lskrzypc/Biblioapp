@@ -2,4 +2,5 @@ export type PlainUserModel = {
     id: string;
     firstname: string;
     lastname: string;
+    photo: string;
     };
