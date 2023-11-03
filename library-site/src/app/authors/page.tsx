@@ -1,5 +1,4 @@
 'use client';
-'use strict'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Header, Title } from '@/components';

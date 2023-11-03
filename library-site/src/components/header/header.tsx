@@ -1,6 +1,3 @@
-// Desc: Header qui sera présent sur toutes les pages
-// Auteur: Louis SKRZYPCZAK
-
 import { FC, useState } from "react";
 
 // Redirections vers les différentes pages

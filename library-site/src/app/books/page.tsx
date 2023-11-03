@@ -64,8 +64,6 @@ const BooksPage: FC = (): ReactElement => {
           </div>
         ))}
       </div>
- 
- 
     </div>
   );
 };

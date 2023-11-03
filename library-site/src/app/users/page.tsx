@@ -1,4 +1,4 @@
-'use strict';
+
 'use client';
 import { FC, ReactElement, useEffect, useState } from 'react';
 import { useUsersProviders } from '@/hooks';
