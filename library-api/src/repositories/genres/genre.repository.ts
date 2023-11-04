@@ -60,8 +60,8 @@ export class GenreRepository extends Repository<Genre> {
      * @returns void
      */
     public async deleteGenre(id: GenreId): Promise<void> {
-    const genre = await this.findOne({ where: { id } });
+    const genre = await this.getGenreById(id);
     if (!genre) throw new Error(`Genre - '${id}'`);
-    await this.remove(genre);
+    await this.delete(genre);
     }
 }

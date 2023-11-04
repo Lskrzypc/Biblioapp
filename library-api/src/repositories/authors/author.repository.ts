@@ -40,6 +40,7 @@ export class AuthorRepository extends Repository<Author> {
    * Create an author
    * @param input Data to create an author
    * @returns Author created
+   * @throws Error if author already exists
    */
   public async createAuthor(input: PlainAuthorRepositoryOutput): Promise<CreateAuthorRepositoryInput> {
     const id = await this.dataSource.transaction(async (manager) => {
@@ -82,12 +83,11 @@ export class AuthorRepository extends Repository<Author> {
    * @returns Author deleted
    * @throws Error if author not found
    */
-  public async deleteAuthor(id: AuthorId): Promise<PlainAuthorRepositoryOutput> {//Changer la promesse si le front a besoin de changer
-    const author = await this.findOne({ where: { id } });
+  public async deleteById(id: AuthorId): Promise<void> {//Changer la promesse si le front a besoin de changer
+    const author = await this.getAuthorById(id);
     if (!author) throw new Error(`Author - '${id}'`);
 
-    await this.remove(author);
-    return adaptAuthorEntityToPlainAuthorModel(author);
+    await this.delete(author);
   }
   
 
