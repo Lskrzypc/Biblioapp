@@ -47,8 +47,8 @@ export class AuthorUseCases {
      * @param id Author's ID
      * @returns Author deleted
      */
-    public async deleteAuthor(id: AuthorId) {
-        return this.authorRepository.deleteAuthor(id);
+    public async deleteById(id: AuthorId) {
+        return this.authorRepository.deleteById(id);
     }
 
 }

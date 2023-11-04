@@ -39,8 +39,8 @@ export class AuthorController {
     @Delete('/:id')
     public async deleteAuthor(
     @Param('id') id: AuthorId,
-    ): Promise<AuthorPresenter> {
-    return this.authorUseCases.deleteAuthor(id);
+    ): Promise<void> {
+    return this.authorUseCases.deleteById(id);
     }
     
 }
