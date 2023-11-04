@@ -49,13 +49,6 @@ export class AuthorRepository extends Repository<Author> {
         ...input,
       });
       await manager.save(author);
-      //On va vérifier que l'auteur n'existe pas déjà puis supprimer le doublon si c'est le cas et renvoyer une erreur
-      const authorExists = await this.findOne({ where: { lastName: author.lastName }});
-      if (authorExists) {
-        await this.remove(author);
-        throw new Error(`Author - '${author.lastName}' already exists`);
-      }
-      
       return author.id;
     });
 
