@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { PlainAuthorModel } from '@/models'; // Assurez-vous d'importer le modèle d'auteur approprié
+import { CreateAuthorModel, PlainAuthorModel, UpdateAuthorModel } from '@/models'; // Assurez-vous d'importer le modèle d'auteur approprié
 
 type UseAuthorProvider = {
   authors: PlainAuthorModel[];
-  createAuthor: (author: PlainAuthorModel) => void;
-  updateAuthor: (authorId: number, author: PlainAuthorModel) => void;
-  deleteAuthor: (authorId: number) => void;
+  createAuthor: (author: CreateAuthorModel) => void;
+  updateAuthor: (authorId: string, author: UpdateAuthorModel) => void;
+  deleteAuthor: (authorId: string) => void;
   loadAuthors: () => void;
 };
 
@@ -20,7 +20,7 @@ export const useAuthorProvider = (): UseAuthorProvider => {
       .catch((err) => console.error(err));
   };
 
-  const createAuthor = (author: PlainAuthorModel): void => {
+  const createAuthor = (author: CreateAuthorModel): void => {
     axios
       .post(`${process.env.NEXT_PUBLIC_API_URL}/authors`, author)
       .then(() => {
@@ -29,7 +29,7 @@ export const useAuthorProvider = (): UseAuthorProvider => {
       .catch((err) => console.error(err));
   };
 
-  const updateAuthor = (authorId: number, author: PlainAuthorModel): void => {
+  const updateAuthor = (authorId: string, author: UpdateAuthorModel): void => {
     axios
       .put(`${process.env.NEXT_PUBLIC_API_URL}/authors/${authorId}`, author)
       .then(() => {
@@ -38,10 +38,11 @@ export const useAuthorProvider = (): UseAuthorProvider => {
       .catch((err) => console.error(err));
   };
 
-  const deleteAuthor = (authorId: number): void => {
+  const deleteAuthor = (authorId: string): void => {
     axios
       .delete(`${process.env.NEXT_PUBLIC_API_URL}/authors/${authorId}`)
       .then(() => {
+        window.location.href = "/authors";
         // La suppression de l'auteur a réussi. Vous pouvez mettre à jour l'état ou afficher un message de confirmation ici.
       })
       .catch((err) => console.error(err));
