@@ -87,7 +87,7 @@ const AuthorsPage: React.FC = () => {
           </div>
         ))}
       </div>
-      <span className='flex font-regular text-white items-center justify-center'><button onClick={handleAddAuthorClick} aria-label="Add author" className='px-8 h-10 bg-green-project rounded-xl'>Ajouter un auteur</button></span>
+      <span className='flex text-xs font-regular text-white items-center justify-center'><button onClick={handleAddAuthorClick} aria-label="Add author" className='px-8 h-10 bg-green-project rounded-xl'>Ajouter un auteur</button></span>
       {isModalOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black opacity-70 z-10">
         </div>

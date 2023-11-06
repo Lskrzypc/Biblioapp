@@ -44,7 +44,7 @@ const AuthorDetailsPage: React.FC = () => {
         <div className='flex flex-col gap-y-8'>
 
           <div className='flex flex-col gap-y-10'>
-          
+         
             <Header />
 
             <div className='w-full flex items-center justify-center'>
@@ -65,5 +65,3 @@ const AuthorDetailsPage: React.FC = () => {
     </>
   );
 };
-
-export default AuthorDetailsPage;
