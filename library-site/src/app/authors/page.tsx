@@ -1,41 +1,25 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Header, Title, AddAuthorModal } from '@/components';
+import { useAuthorsProviders } from '@/hooks/providers/authorProviders';
 
-interface AuthorModel {
-  id: string;
-  firstName: string;
-  lastName: string;
-  photoUrl: string;
-}
 
 const AuthorsPage: React.FC = () => {
-  const [authors, setAuthors] = useState<AuthorModel[]>([]);
+  
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { useListAuthors } = useAuthorsProviders();
+  const { authors, load } = useListAuthors();
+
+  useEffect(() => load, []);
 
   const handleAuthorClick = (id: string) => {
     window.location.href = `/authors/${id}`;
   }
 
-  const handleAddAuthor = (newAuthor: AuthorModel) => {
-    setAuthors((currentAuthors) => [...currentAuthors, newAuthor]);
-  };
-
   const handleAddAuthorClick = () => {
-    setIsModalOpen(true);
+    setIsModalOpen(!isModalOpen);
   };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  useEffect(() => {
-    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/authors`)
-      .then(response => setAuthors(response.data))
-      .catch(error => console.error("Erreur lors de la récupération de la liste des auteurs:", error));
-  }, []);
 
   return (
     <div className="flex flex-col gap-y-10">
@@ -92,7 +76,7 @@ const AuthorsPage: React.FC = () => {
         <div className="fixed top-0 left-0 w-full h-full bg-black opacity-70 z-10">
         </div>
       )}
-      <AddAuthorModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} onAddAuthor={handleAddAuthor} />
+      <AddAuthorModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       </div>
   );
 };

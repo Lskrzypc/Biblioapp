@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
+import { useCreateAuthor } from '@/hooks/creaters/authorCreaters';
 
 interface AddAuthorModalProps {
   isOpen: boolean;
   setIsModalOpen: (isOpen: boolean) => void;
-  onAddAuthor: (author: { id: string; firstName: string; lastName: string; photoUrl: string }) => void;
 }
 
-export const AddAuthorModal: React.FC<AddAuthorModalProps> = ({ isOpen, setIsModalOpen, onAddAuthor }) => {
-  const [id, setId] = useState('');
+export const AddAuthorModal: React.FC<AddAuthorModalProps> = ({ isOpen, setIsModalOpen}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
+  const authorToCreate = {
+    firstName,
+    lastName,
+    photoUrl
+  };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-
-    onAddAuthor({ id, firstName, lastName, photoUrl });
-    setIsModalOpen(false);
+    useCreateAuthor(authorToCreate);
   };
 
   if (!isOpen) return null;
@@ -25,9 +27,7 @@ export const AddAuthorModal: React.FC<AddAuthorModalProps> = ({ isOpen, setIsMod
     <div className={`fixed inset-0 flex items-center justify-center z-50 ${isOpen ? '' : 'hidden'}`}>
     <div className="modal bg-white rounded-lg p-6 max-w-lg mx-auto">
         <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-            <input type="text" value={id} onChange={(e) => setId(e.target.value)} placeholder="ID" required className="w-full p-2 border border-gray-300 rounded"/>
-        </div>
+        
         <div className="mb-4">
             <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Prénom" required className="w-full p-2 border border-gray-300 rounded"/>
         </div>

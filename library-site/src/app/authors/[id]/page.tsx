@@ -20,7 +20,6 @@ const AuthorDetailsPage: React.FC = () => {
   useEffect(() => {
     console.log("Authors page loaded");
  }, []);
- 
 
   useEffect(() => {
    
@@ -46,7 +45,6 @@ const AuthorDetailsPage: React.FC = () => {
 
           <span className="text-center"><Title content={author.firstName + ' ' + author.lastName} /></span>
 
-
         </div>
 
 
@@ -58,3 +56,4 @@ const AuthorDetailsPage: React.FC = () => {
     </>
   );
 };
+export default AuthorDetailsPage;
