@@ -5,18 +5,21 @@ import { Header, Title, AddAuthorModal } from '@/components';
 import { useAuthorsProviders } from '@/hooks/providers/authorProviders';
 
 const AuthorsPage: React.FC = () => {
+  // Variables d'état : pour la barre de recherche et pour l'ouverture de la modale
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Récupération de la liste des auteurs
   const { useListAuthors } = useAuthorsProviders();
   const { authors, load } = useListAuthors();
-
   useEffect(() => load, []);
 
+  // Redirection lors du clic sur "infos" d'un auteur
   const handleAuthorClick = (id: string) => {
     window.location.href = `/authors/${id}`;
   };
 
+  // Ouverture de la modale d'ajout d'un auteur lors du clic sur le bouton "Ajouter un auteur"
   const handleAddAuthorClick = () => {
     setIsModalOpen(!isModalOpen);
   };
@@ -27,6 +30,7 @@ const AuthorsPage: React.FC = () => {
     return fullName.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
+  // Affichage de la page
   return (
     <div className="flex flex-col gap-y-10">
       <Header />
