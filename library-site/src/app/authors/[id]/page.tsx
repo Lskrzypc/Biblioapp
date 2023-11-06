@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, {useState, useEffect } from 'react';
@@ -17,6 +18,15 @@ const AuthorDetailsPage: React.FC = () => {
   const { id } = useParams();
   const [author, setAuthor] = useState<AuthorModel | null>(null);
 
+  const DeleteAuthor = () => {
+    axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/authors/${id}`)
+    .then(response => {
+    console.log(response);
+    window.location.href = "/authors"}
+    )
+    .catch(error => console.error("Erreur lors de la suppression de l'auteur:", error));
+  }
+
   useEffect(() => {
     console.log("Authors page loaded");
  }, []);
@@ -35,7 +45,7 @@ const AuthorDetailsPage: React.FC = () => {
         <div className='flex flex-col gap-y-8'>
 
           <div className='flex flex-col gap-y-10'>
-          
+         
             <Header />
 
             <div className='w-full flex items-center justify-center'>
@@ -45,6 +55,7 @@ const AuthorDetailsPage: React.FC = () => {
           </div>
 
           <span className="text-center"><Title content={author.firstName + ' ' + author.lastName} /></span>
+          <div className='flex font-regular text-white items-center justify-center'><button onClick={DeleteAuthor} className="bg-red-500 text-white px-4 py-2 rounded-md">Supprimer</button></div>
 
 
         </div>
