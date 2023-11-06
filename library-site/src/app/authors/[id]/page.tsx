@@ -17,6 +17,15 @@ const AuthorDetailsPage: React.FC = () => {
   const { id } = useParams();
   const [author, setAuthor] = useState<AuthorModel | null>(null);
 
+  const DeleteAuthor = () => {
+    axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/authors/${id}`)
+    .then(response => {
+    console.log(response);
+    window.location.href = "/authors"}
+    )
+    .catch(error => console.error("Erreur lors de la suppression de l'auteur:", error));
+  }
+
   useEffect(() => {
     console.log("Authors page loaded");
  }, []);
@@ -45,12 +54,10 @@ const AuthorDetailsPage: React.FC = () => {
           </div>
 
           <span className="text-center"><Title content={author.firstName + ' ' + author.lastName} /></span>
+          <span className='flex font-regular items-center justify-center'><button onClick={DeleteAuthor} className="bg-red-400 text-white px-2 py-2 rounded-md" style={{ width: 'auto !important' }}>Supprimer cet auteur</button></span>
 
 
         </div>
-
-
-
 
       ) : (
         <Title content="Chargement..." />
