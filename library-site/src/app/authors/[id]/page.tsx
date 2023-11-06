@@ -1,35 +1,26 @@
 'use client';
 
-import React, {useState, useEffect } from 'react';
-import axios from 'axios';
+import React, {useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { Header, Title } from '@/components';
-import { useDeleteAuthor } from '@/hooks';
+import { useDeleteAuthor, useAuthorByIdProviders } from '@/hooks';
 
 
-interface AuthorModel {
-  id: string;
-  firstName: string;
-  lastName: string;
-  photoUrl: string;
-}
 
 const AuthorDetailsPage: React.FC = () => {
   const { id } = useParams();
-  const [author, setAuthor] = useState<AuthorModel | null>(null);
+  
   const idAuthorToDelete: string = id.toString();
+
+  const { useAuthorById } = useAuthorByIdProviders();
+  const { author, load } = useAuthorById();
+  
+  useEffect(() => load(idAuthorToDelete), []);
 
 
   useEffect(() => {
     console.log("Authors page loaded");
  }, []);
-
-  useEffect(() => {
-   
-    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/authors/${id}`)
-      .then(response => setAuthor(response.data))
-      .catch(error => console.error("Erreur lors de la récupération de l'auteur:", error));
-  }, [id]);
 
   const handleDeleteAuthor = () => {
     useDeleteAuthor(idAuthorToDelete);
@@ -52,7 +43,7 @@ const AuthorDetailsPage: React.FC = () => {
 
           <span className="text-center"><Title content={author.firstName + ' ' + author.lastName} /></span>
 
-          <button onClick={handleDeleteAuthor}>*SUPPPRRRRIMER</button>
+          <button onClick={handleDeleteAuthor}></button>
         
           
         </div>

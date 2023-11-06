@@ -8,6 +8,7 @@ const AuthorsPage: React.FC = () => {
   
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const { useListAuthors } = useAuthorsProviders();
   const { authors, load } = useListAuthors();
 
