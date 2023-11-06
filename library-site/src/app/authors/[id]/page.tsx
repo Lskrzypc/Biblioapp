@@ -4,6 +4,7 @@ import React, {useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
 import { Header, Title } from '@/components';
+import { useDeleteAuthor } from '@/hooks';
 
 
 interface AuthorModel {
@@ -16,6 +17,8 @@ interface AuthorModel {
 const AuthorDetailsPage: React.FC = () => {
   const { id } = useParams();
   const [author, setAuthor] = useState<AuthorModel | null>(null);
+  const idAuthorToDelete: string = id.toString();
+
 
   useEffect(() => {
     console.log("Authors page loaded");
@@ -27,6 +30,10 @@ const AuthorDetailsPage: React.FC = () => {
       .then(response => setAuthor(response.data))
       .catch(error => console.error("Erreur lors de la récupération de l'auteur:", error));
   }, [id]);
+
+  const handleDeleteAuthor = () => {
+    useDeleteAuthor(idAuthorToDelete);
+  }
 
   return (
     <>
@@ -45,6 +52,9 @@ const AuthorDetailsPage: React.FC = () => {
 
           <span className="text-center"><Title content={author.firstName + ' ' + author.lastName} /></span>
 
+          <button onClick={handleDeleteAuthor}>*SUPPPRRRRIMER</button>
+        
+          
         </div>
 
 
