@@ -43,7 +43,7 @@ const AuthorDetailsPage: React.FC = () => {
 
           <span className="text-center"><Title content={author.firstName + ' ' + author.lastName} /></span>
 
-          <button onClick={handleDeleteAuthor}></button>
+          <button onClick={handleDeleteAuthor}>SUPPRIMER</button>
         
           
         </div>
