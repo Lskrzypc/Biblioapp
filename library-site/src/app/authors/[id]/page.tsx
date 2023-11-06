@@ -54,10 +54,13 @@ const AuthorDetailsPage: React.FC = () => {
           </div>
 
           <span className="text-center"><Title content={author.firstName + ' ' + author.lastName} /></span>
-          <span className='flex font-regular items-center justify-center'><button onClick={DeleteAuthor} className="bg-red-400 text-white px-2 py-2 rounded-md" style={{ width: 'auto !important' }}>Supprimer cet auteur</button></span>
+          <div className='flex  font-regular text-white items-center justify-center'><button onClick={DeleteAuthor} className="bg-red-500 text-white px-4 py-2 rounded-md">Supprimer</button></div>
 
 
         </div>
+
+
+
 
       ) : (
         <Title content="Chargement..." />
@@ -65,3 +68,5 @@ const AuthorDetailsPage: React.FC = () => {
     </>
   );
 };
+
+export default AuthorDetailsPage;

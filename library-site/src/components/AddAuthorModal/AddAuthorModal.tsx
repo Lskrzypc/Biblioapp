@@ -6,7 +6,7 @@ interface AddAuthorModalProps {
   onAddAuthor: (author: { id: string; firstName: string; lastName: string; photoUrl: string }) => void;
 }
 
-const AddAuthorModal: React.FC<AddAuthorModalProps> = ({ isOpen, setIsModalOpen, onAddAuthor }) => {
+export const AddAuthorModal: React.FC<AddAuthorModalProps> = ({ isOpen, setIsModalOpen, onAddAuthor }) => {
   const [id, setId] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -25,7 +25,6 @@ const AddAuthorModal: React.FC<AddAuthorModalProps> = ({ isOpen, setIsModalOpen,
     <div className={`fixed inset-0 flex items-center justify-center z-50 ${isOpen ? '' : 'hidden'}`}>
     <div className="modal bg-white rounded-lg p-6 max-w-lg mx-auto">
         <form onSubmit={handleSubmit}>
-
         <div className="mb-4">
             <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Prénom" required className="w-full p-2 border border-gray-300 rounded"/>
         </div>
