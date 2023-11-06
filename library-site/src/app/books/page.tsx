@@ -29,12 +29,20 @@ const BooksPage: React.FC = () => {
       })
       .catch(error => console.error("Erreur lors de l'ajout du livre:", error));
   };
+<<<<<<< HEAD
  
+=======
+  
+>>>>>>> 9bf92e03e703c02bcb19c185972ad2ea5baf3015
 
   const handleAddBookClick = () => {
     setIsModalOpen(true);
   };
+<<<<<<< HEAD
  
+=======
+  
+>>>>>>> 9bf92e03e703c02bcb19c185972ad2ea5baf3015
 
   useEffect(() => {
     axios.get(`${process.env.NEXT_PUBLIC_API_URL}/books`)

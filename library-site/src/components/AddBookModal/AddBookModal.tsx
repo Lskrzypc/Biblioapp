@@ -78,4 +78,8 @@ const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOpen, onA
   );
 };
 
+<<<<<<< HEAD
 export default AddBookModal;
+=======
+export default AddBookModal;
+>>>>>>> 9bf92e03e703c02bcb19c185972ad2ea5baf3015

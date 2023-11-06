@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, {useState, useEffect } from 'react';
@@ -54,7 +55,11 @@ const AuthorDetailsPage: React.FC = () => {
           </div>
 
           <span className="text-center"><Title content={author.firstName + ' ' + author.lastName} /></span>
+<<<<<<< HEAD
           <div className='flex  font-regular text-white items-center justify-center'><button onClick={DeleteAuthor} className="bg-red-500 text-white px-4 py-2 rounded-md">Supprimer</button></div>
+=======
+          <div className='flex font-regular text-white items-center justify-center'><button onClick={DeleteAuthor} className="bg-red-500 text-white px-4 py-2 rounded-md">Supprimer</button></div>
+>>>>>>> 9bf92e03e703c02bcb19c185972ad2ea5baf3015
 
 
         </div>
