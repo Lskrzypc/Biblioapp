@@ -1,14 +1,13 @@
-'use client'
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { Header, Title, AddAuthorModal } from '@/components';
 import { useAuthorsProviders } from '@/hooks/providers/authorProviders';
 
-
 const AuthorsPage: React.FC = () => {
-  
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const { useListAuthors } = useAuthorsProviders();
   const { authors, load } = useListAuthors();
 
@@ -16,16 +15,24 @@ const AuthorsPage: React.FC = () => {
 
   const handleAuthorClick = (id: string) => {
     window.location.href = `/authors/${id}`;
-  }
+  };
 
   const handleAddAuthorClick = () => {
     setIsModalOpen(!isModalOpen);
   };
 
+  // Filtrer les auteurs en fonction du terme de recherche
+  const filteredAuthors = authors.filter((author) => {
+    const fullName = `${author.firstName} ${author.lastName}`;
+    return fullName.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   return (
     <div className="flex flex-col gap-y-10">
       <Header />
-      <span className="pl-6"><Title content="Les Auteurs :" /></span>
+      <span className="pl-6">
+        <Title content="Les Auteurs :" />
+      </span>
 
       <div className="mx-6 mt-4 flex items-center bg-black-project rounded-full p-2 w-60 h-8">
         <span className="inline-block mr-2">
@@ -46,15 +53,26 @@ const AuthorsPage: React.FC = () => {
           type="text"
           placeholder="Rechercher..."
           value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        <svg
+          className="h-6 w-6 text-white"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M4 6h16M4 12h16m-7 6h7"
+          ></path>
         </svg>
       </div>
 
       <div className="flex flex-wrap gap-x-10 gap-y-10 pl-6 pr-6">
-        {authors.map(author => (
+        {filteredAuthors.map((author) => (
           <div className="w-80 h-20 flex items-center border-2 border-gray-project rounded-lg" key={author.id}>
             <div className='pl-3 h-16 w-20 '><img className='object-cover h-full w-full rounded-lg' src={author.photoUrl} alt=''></img></div>
             <p className='font-outfit font-semibold text-gray-project pl-3 w-full text-left'>{author.firstName} {author.lastName}</p>
@@ -72,13 +90,15 @@ const AuthorsPage: React.FC = () => {
           </div>
         ))}
       </div>
-      <span className='flex text-xs font-regular text-white items-center justify-center'><button onClick={handleAddAuthorClick} aria-label="Add author" className='px-8 h-10 bg-green-project rounded-xl'>Ajouter un auteur</button></span>
+      <span className='flex text-xs font-regular text-white items-center justify-center'>
+        <button onClick={handleAddAuthorClick} aria-label="Add author" className='px-8 h-10 bg-green-project rounded-xl'>Ajouter un auteur</button>
+      </span>
       {isModalOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black opacity-70 z-10">
         </div>
       )}
       <AddAuthorModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-      </div>
+    </div>
   );
 };
 
