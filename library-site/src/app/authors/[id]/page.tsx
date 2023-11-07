@@ -42,10 +42,13 @@ const AuthorDetailsPage: React.FC = () => {
           </div>
 
           <span className="text-center"><Title content={author.firstName + ' ' + author.lastName} /></span>
-
-          <button onClick={handleDeleteAuthor}>SUPPRIMER</button>
-        
-          
+          <div className='text-center'>
+            <div className='mb-5'>
+              <div className='border border-red-500 inline-block'>
+              <button onClick={handleDeleteAuthor} className='text-red-500 px-4 py-2 rounded-md'>SUPPRIMER</button>
+              </div>
+            </div>
+          </div>
         </div>
 
 

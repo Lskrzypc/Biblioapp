@@ -22,6 +22,11 @@ const BooksPage: React.FC = () => {
     setIsModalOpen(true);
   };
 
+  const filteredBooks = books.filter((book) => {
+    const fullName = `${book.name} ${book.author.firstName} ${book.author.lastName} ${book.genres}`;
+    return fullName.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   return (
     <div className="flex flex-col gap-y-10">
 
@@ -55,7 +60,7 @@ const BooksPage: React.FC = () => {
 
  
       <div className="flex flex-wrap gap-x-10 gap-y-10 pl-6 pr-6">
-        {books.map(book => (
+        {filteredBooks.map(book => (
           <div className="w-80 h-20 flex items-center border-2 border-gray-project rounded-lg" key={book.id}>
             <div className='pl-3 h-16 w-20 '>
               <img className='object-cover h-full w-full rounded-lg' src={book.author.photoUrl} alt={book.name} />
