@@ -9,7 +9,7 @@ import {
   BookGenre,
   BookId,
   Genre,
-} from 'library-api/src/entities';
+} from './../../entities';
 import {
   BookRepositoryOutput,
   PlainBookRepositoryOutput,
@@ -19,7 +19,7 @@ import {
 import {
   adaptBookEntityToBookModel,
   adaptBookEntityToPlainBookModel,
-} from 'library-api/src/repositories/books/book.utils';
+} from '././book.utils';
 import { DataSource, Repository, In } from 'typeorm';
 import { v4 } from 'uuid';
 
@@ -98,7 +98,7 @@ export class BookRepository extends Repository<Book> {
 
       if (input.genres && input.genres.length > 0) {
         await manager.delete<BookGenre>(BookGenre, { book: { id: book.id } });
-       
+
         const newGenres = await manager.find<Genre>(Genre, {
           where: {
             name: In(input.genres),
@@ -166,7 +166,7 @@ export class BookRepository extends Repository<Book> {
     await this.dataSource.transaction(async (manager) => {
       if (input.genres) {
         await manager.delete<BookGenre>(BookGenre, { book: { id } });
-        
+
         const newGenres = await manager.find<Genre>(Genre, {
           where: {
             name: In(input.genres),
