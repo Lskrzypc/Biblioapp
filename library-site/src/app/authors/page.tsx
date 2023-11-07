@@ -77,7 +77,7 @@ const AuthorsPage: React.FC = () => {
 
       <div className="flex flex-wrap gap-x-10 gap-y-10 pl-6 pr-6">
         {filteredAuthors.map((author) => (
-          <div className="w-80 h-20 flex items-center border-2 border-gray-project rounded-lg" key={author.id}>
+          <div className="w-80 h-20 flex items-center border-2 border-gray-project rounded-lg" key={author.id} >
             <div className='pl-3 h-16 w-20 '><img className='object-cover h-full w-full rounded-lg' src={author.photoUrl} alt=''></img></div>
             <p className='font-outfit font-semibold text-gray-project pl-3 w-full text-left'>{author.firstName} {author.lastName}</p>
             <button aria-label="View author" className='pr-5' onClick={() => handleAuthorClick(author.id)}>
