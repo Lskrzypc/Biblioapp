@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Genre, GenreId } from 'library-api/src/entities';
+import { Genre, GenreId } from './../../entities';
 import { DataSource, Repository } from 'typeorm';
 import {GenreRepositoryInput, GenreRepositoryOutput} from "./genre.repository.type";
 import {adaptGenreEntityToPlainGenreModel} from "./genre.utils";
