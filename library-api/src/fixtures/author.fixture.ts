@@ -7,3 +7,9 @@ export const authorFixture = () : Author =>
         firstName: faker.string.sample(8),
         lastName: faker.string.sample(8),
     }) as Author;
+
+export const authorInputFixture = () : Author =>
+    ({
+        firstName: faker.string.sample(8),
+        lastName: faker.string.sample(8),
+    }) as Author;

@@ -1,7 +1,7 @@
 import {AuthorRepository} from "./author.repository";
-import {authorFixture} from "../../fixtures";
+import {authorFixture, authorInputFixture} from "../../fixtures";
 import {adaptAuthorEntityToPlainAuthorModel} from "./author.utils";
-import { DataSource } from 'typeorm';
+import {DataSource, EntityManager} from 'typeorm';
 
 
 describe('AuthorRepository',()=>{
@@ -56,4 +56,25 @@ describe('AuthorRepository',()=>{
         })
     })
 
+    describe("deleteById", () =>{
+        it('should delete an author', async ()=>{
+            const dataSource = {
+                createEntityManager: jest.fn(),
+            } as unknown as DataSource;
+            const repository = new AuthorRepository(dataSource);
+
+            const author = authorFixture();
+
+            const findOneSpy = jest
+                .spyOn(repository, 'findOne')
+                .mockResolvedValue(author);
+
+            const result = await repository.getAuthorById(author.id);
+
+            expect(findOneSpy).toHaveBeenCalledTimes(1);
+            expect(findOneSpy).toHaveBeenCalledWith({ where: { id: author.id } });
+
+            expect(result).toEqual(adaptAuthorEntityToPlainAuthorModel(author));
+        })
+    })
 })
