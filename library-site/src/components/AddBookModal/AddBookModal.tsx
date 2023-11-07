@@ -1,49 +1,46 @@
 import React, { useState } from 'react';
+import { useCreateBook } from '@/hooks/creaters/bookCreaters';
 
 interface AddBookModalProps {
   isOpen: boolean;
-  setIsModalOpen: (isOpen: boolean) => void;
-  onAddBook: (book: {
-    title: string;
-    authorId: string;
-    authorFirstName: string;
-    authorLastName: string;
-    genres: string[];
-    photoUrl: string;
-  }) => void;
+  setIsModalOpen: (isOpen: boolean) => void; 
 }
 
-export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOpen, onAddBook }) => {
-  const [title, setTitle] = useState('');
+const parseDate = (dateString: string) => {
+  const [year, month, day] = dateString.split('-').map(Number);
+  if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+    return new Date(year, month - 1, day); // Mois est 0-indexé, donc soustrayez 1
+  }
+  else {return new Date(2000, 5, 5);}
+};
+
+export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOpen }) => {
+  const [name, setName] = useState('');
+  const [writtenOnDate, setWrittenOnDate] = useState('');
   const [authorId, setAuthorId] = useState('');
   const [authorFirstName, setAuthorFirstName] = useState('');
   const [authorLastName, setAuthorLastName] = useState('');
   const [genres, setGenres] = useState<string[]>([]);
-  const [photoUrl, setPhotoUrl] = useState('');
   const [newGenre, setNewGenre] = useState('');
+  
+  const writtenOn = parseDate(writtenOnDate);
+  const bookToCreate = {
+    name,
+    writtenOn,
+     author: {
+      id: authorId,
+      firstName: authorFirstName,
+      lastName: authorLastName,
+    },
+    genres,
+  };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-
-
-    onAddBook({
-      title,
-      authorId,
-      authorFirstName,
-      authorLastName,
-      genres,
-      photoUrl,
-    });
-
-
-    setTitle('');
-    setAuthorId('');
-    setAuthorFirstName('');
-    setAuthorLastName('');
-    setGenres([]);
-    setPhotoUrl('');
-    setNewGenre('');
+    useCreateBook(bookToCreate);
   };
+
+  
 
   const handleAddGenre = () => {
     if (newGenre && !genres.includes(newGenre)) {
@@ -67,13 +64,25 @@ export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOp
           <div className="mb-4">
             <input
               type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Titre du livre"
               required
               className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
+
+          <div className="mb-4">
+            <input
+              type="text"
+              value={writtenOnDate}
+              onChange={(e) => setWrittenOnDate(e.target.value)}
+              placeholder="YYYY-MM-DD"
+              required
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+
 
 
           <div className="mb-4">
@@ -137,16 +146,6 @@ export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOp
                 </button>
               </div>
             ))}
-          </div>
-
-          <div className="mb-4">
-            <input
-              type="text"
-              value={photoUrl}
-              onChange={(e) => setPhotoUrl(e.target.value)}
-              placeholder="URL de la couverture du livre"
-              className="w-full p-2 border border-gray-300 rounded"
-            />
           </div>
 
           <div className="flex justify-end">

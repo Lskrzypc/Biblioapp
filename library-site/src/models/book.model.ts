@@ -3,6 +3,8 @@ import { AuthorModel } from "./author.model";
 export type PlainBookModel = {
   id: string;
   name: string;
+  author: AuthorModel;
+  genres: string[];
 };
 
 export type CreateBookModel = {
