@@ -49,4 +49,50 @@ describe("AuthorUseCases", () => {
             expect(result).toEqual(adaptAuthorEntityToPlainAuthorModel(author));
         })
     })
+
+    describe("createAuthor", () => {
+        it ("should call createAuthor from repository function", async () => {
+            const repository = {
+                createAuthor: jest.fn(),
+            } as unknown as AuthorRepository;
+
+            const useCase = new AuthorUseCases(repository);
+
+            const author = authorFixture();
+
+            const createAuthorSpy = jest
+                .spyOn(repository, "createAuthor")
+                .mockResolvedValue(author);
+
+            const result = await useCase.createAuthor(author);
+
+            expect(createAuthorSpy).toHaveBeenCalledTimes(1);
+            expect(createAuthorSpy).toHaveBeenCalledWith(author);
+
+            expect(result).toEqual(adaptAuthorEntityToPlainAuthorModel(author));
+        })
+    })
+
+    describe ("updateAuthor", () => {
+        it("should call updateAuthor from repository function", async () => {
+            const repository = {
+                updateAuthor: jest.fn(),
+            } as unknown as AuthorRepository;
+
+            const useCase = new AuthorUseCases(repository);
+
+            const author = authorFixture();
+
+            const updateAuthorSpy = jest
+                .spyOn(repository, "updateAuthor")
+                .mockResolvedValue(author);
+
+            const result = await useCase.updateAuthor(author);
+
+            expect(updateAuthorSpy).toHaveBeenCalledTimes(1);
+            expect(updateAuthorSpy).toHaveBeenCalledWith(author);
+
+            expect(result).toEqual(adaptAuthorEntityToPlainAuthorModel(author));
+        })
+    })
 })

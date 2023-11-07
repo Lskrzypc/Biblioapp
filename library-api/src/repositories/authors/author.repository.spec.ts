@@ -56,6 +56,28 @@ describe('AuthorRepository',()=>{
         })
     })
 
+    describe("updateAuthor", () =>{
+        it("should update an author", async ()=>{
+            const dataSource = {
+                createEntityManager: jest.fn(),
+            } as unknown as DataSource;
+            const repository = new AuthorRepository(dataSource);
+
+            const author = authorFixture();
+
+            const findOneSpy = jest
+                .spyOn(repository, 'findOne')
+                .mockResolvedValue(author);
+
+            const result = await repository.getAuthorById(author.id);
+
+            expect(findOneSpy).toHaveBeenCalledTimes(1);
+            expect(findOneSpy).toHaveBeenCalledWith({ where: { id: author.id } });
+
+            expect(result).toEqual(adaptAuthorEntityToPlainAuthorModel(author));
+        })
+    })
+
     describe("deleteById", () =>{
         it('should delete an author', async ()=>{
             const dataSource = {
