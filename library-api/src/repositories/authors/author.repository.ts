@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Author, AuthorId } from 'library-api/src/entities'; // Assurez-vous d'importer AuthorId
+import { Author, AuthorId } from './../../entities/Author'; // Assurez-vous d'importer AuthorId
 import { DataSource, Repository } from 'typeorm';
 import { CreateAuthorRepositoryInput, PlainAuthorRepositoryOutput, UpdateAuthorRepositoryInput} from './author.repository.type';
 import { adaptAuthorEntityToPlainAuthorModel } from './author.utils'; // Assurez-vous d'importer le fichier d'adaptation
@@ -19,7 +19,7 @@ export class AuthorRepository extends Repository<Author> {
     const authors = await this.find({
       relations: { books: true },
     });
-    
+
     return authors.map(adaptAuthorEntityToPlainAuthorModel);
   }
 
@@ -89,6 +89,6 @@ export class AuthorRepository extends Repository<Author> {
 
     await this.delete(author);
   }
-  
+
 
 }

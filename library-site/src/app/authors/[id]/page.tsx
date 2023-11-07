@@ -20,10 +20,10 @@ const AuthorDetailsPage: React.FC = () => {
   useEffect(() => {
     console.log("Authors page loaded");
  }, []);
- 
+
 
   useEffect(() => {
-   
+
     axios.get(`${process.env.NEXT_PUBLIC_API_URL}/authors/${id}`)
       .then(response => setAuthor(response.data))
       .catch(error => console.error("Erreur lors de la récupération de l'auteur:", error));
@@ -35,7 +35,7 @@ const AuthorDetailsPage: React.FC = () => {
         <div className='flex flex-col gap-y-8'>
 
           <div className='flex flex-col gap-y-10'>
-         
+
             <Header />
 
             <div className='w-full flex items-center justify-center'>
@@ -58,3 +58,5 @@ const AuthorDetailsPage: React.FC = () => {
     </>
   );
 };
+
+export default AuthorDetailsPage;
