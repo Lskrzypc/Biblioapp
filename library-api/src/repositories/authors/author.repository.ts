@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Author, AuthorId } from './../../entities/Author'; // Assurez-vous d'importer AuthorId
+import { Author, AuthorId } from '../../entities'; // Assurez-vous d'importer AuthorId
 import { DataSource, Repository } from 'typeorm';
 import {
   CreateAuthorRepositoryInput,
