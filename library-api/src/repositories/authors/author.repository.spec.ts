@@ -1,7 +1,7 @@
 import {AuthorRepository} from "./author.repository";
-import {authorFixture, authorInputFixture} from "../../fixtures";
+import {authorFixture} from "../../fixtures";
 import {adaptAuthorEntityToPlainAuthorModel} from "./author.utils";
-import {DataSource, EntityManager} from 'typeorm';
+import {DataSource} from 'typeorm';
 
 
 describe('AuthorRepository',()=>{
