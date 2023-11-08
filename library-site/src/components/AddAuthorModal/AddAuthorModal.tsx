@@ -10,12 +10,15 @@ export const AddAuthorModal: React.FC<AddAuthorModalProps> = ({ isOpen, setIsMod
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
+
+  // This is the object that will be sent to the API
   const authorToCreate = {
     firstName,
     lastName,
     photoUrl
   };
 
+  // This function will be called when the form is submitted
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     useCreateAuthor(authorToCreate);
@@ -23,6 +26,7 @@ export const AddAuthorModal: React.FC<AddAuthorModalProps> = ({ isOpen, setIsMod
 
   if (!isOpen) return null;
 
+  // Component code here
   return (
     <div className={`fixed inset-0 flex items-center justify-center z-50 ${isOpen ? '' : 'hidden'}`}>
     <div className="modal bg-white rounded-lg p-6 max-w-lg mx-auto">

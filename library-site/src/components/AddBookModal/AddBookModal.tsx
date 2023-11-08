@@ -6,6 +6,7 @@ interface AddBookModalProps {
   setIsModalOpen: (isOpen: boolean) => void; 
 }
 
+// This function will parse a date string in the format YYYY-MM-DD because we ask the user to enter a string for the date, so we need to convert it to a Date object
 const parseDate = (dateString: string) => {
   const [year, month, day] = dateString.split('-').map(Number);
   if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
@@ -14,7 +15,9 @@ const parseDate = (dateString: string) => {
   else {return new Date(2000, 5, 5);}
 };
 
+
 export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOpen }) => {
+  // These are the states for the form inputs
   const [name, setName] = useState('');
   const [writtenOnDate, setWrittenOnDate] = useState('');
   const [authorId, setAuthorId] = useState('');
@@ -23,6 +26,7 @@ export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOp
   const [genres, setGenres] = useState<string[]>([]);
   const [newGenre, setNewGenre] = useState('');
   
+  // This is the object that will be sent to the API
   const writtenOn = parseDate(writtenOnDate);
   const bookToCreate = {
     name,
@@ -35,13 +39,13 @@ export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOp
     genres,
   };
 
+  // This function will be called when the form is submitted
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     useCreateBook(bookToCreate);
   };
 
-  
-
+  // This function will be called when the user clicks on the "Ajouter" button next to the genre input
   const handleAddGenre = () => {
     if (newGenre && !genres.includes(newGenre)) {
       setGenres(prevGenres => [...prevGenres, newGenre]);
@@ -49,12 +53,14 @@ export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOp
     }
   };
 
+  // In case the user want to remove a genre that he added by mistake
   const handleRemoveGenre = (genreToRemove: string) => {
     setGenres(genres.filter(genre => genre !== genreToRemove));
   };
 
   if (!isOpen) return null;
 
+  // Component code here
   return (
     <div className={`fixed inset-0 flex items-center justify-center z-50 ${isOpen ? '' : 'hidden'}`}>
       <div className="modal bg-white rounded-lg p-6 max-w-lg mx-auto">
