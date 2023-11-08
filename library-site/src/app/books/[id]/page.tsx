@@ -1,8 +1,8 @@
 'use client';
 
-import { Title, Header } from '@/components';
+import { Title, Header, ConfirmDeleteBookModal } from '@/components';
 import { useParams } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useBookByIdProviders, useDeleteBook } from '@/hooks';
 
 const BooksDetailsPage: React.FC = () => {
@@ -10,9 +10,19 @@ const BooksDetailsPage: React.FC = () => {
 
   const idBookToDelete: string = id.toString();
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const handleDeleteBook = () => {
-    useDeleteBook(idBookToDelete);
+    setIsDeleteModalOpen(true);
   }
+
+  const confirmDeleteBook = () => {
+    useDeleteBook(idBookToDelete);
+  };
+
+  const cancelDeleteBook = () => {
+    setIsDeleteModalOpen(false);
+  };
 
   const { useBookById } = useBookByIdProviders();
   const { book, load } = useBookById();
@@ -46,6 +56,12 @@ const BooksDetailsPage: React.FC = () => {
                 <button onClick={handleDeleteBook} className="text-red-500 px-4 py-2 rounded-md">SUPPRIMER</button>
               </div>
             </div>
+            <ConfirmDeleteBookModal
+            isOpen={isDeleteModalOpen}
+            bookName={book.name || ''}
+            onConfirm={confirmDeleteBook}
+            onCancel={cancelDeleteBook}
+          />
         </div>
 
 
