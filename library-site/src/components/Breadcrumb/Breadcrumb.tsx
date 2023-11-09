@@ -11,7 +11,7 @@ type BreadcrumbProps = {
 };
 
 const Breadcrumb: FC<BreadcrumbProps> = ({ items }) => (
-  <div className="flex justify-start ml-4 md:ml-6 lg:ml-8">
+  <div className="flex justify-start ml-2 md:ml-3 lg:ml-4">
     <nav aria-label="breadcrumb" className="py-3">
       <ol className="bg-white px-4 py-2 rounded-lg shadow-md flex space-x-2 sm:space-x-4">
         {items.map((item, index) => (
