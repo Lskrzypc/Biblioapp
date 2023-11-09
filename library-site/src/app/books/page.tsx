@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Header, Title, AddBookModal } from '@/components';
+import { Header, Title, AddBookModal, Breadcrumb } from '@/components';
 import { useBooksProviders } from '@/hooks';
 
 
@@ -27,10 +27,16 @@ const BooksPage: React.FC = () => {
     return fullName.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
+  const breadcrumbItems = [
+    { text: "Accueil", href: "/" },
+    { text: "Livres", href: "/books" },
+  ];
+
   return (
     <div className="flex flex-col gap-y-10">
 
       <Header />
+      <Breadcrumb items={breadcrumbItems} />
       <span className='pl-6'><Title content="Les livres :" /></span>
 
       <div className="mx-6 mt-4 flex items-center bg-black-project rounded-full p-2 w-60 h-8">

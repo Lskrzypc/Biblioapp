@@ -1,21 +1,39 @@
 'use client';
 
-import { Title, Header } from '@/components';
+import { Title, Header, Breadcrumb, ConfirmDeleteBookModal } from '@/components';
 import { useParams } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState  } from 'react';
 import { useBookByIdProviders, useDeleteBook } from '@/hooks';
+import { text } from 'stream/consumers';
+
 
 const BooksDetailsPage: React.FC = () => {
   const { id } = useParams();
 
   const idBookToDelete: string = id.toString();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const handleDeleteBook = () => {
-    useDeleteBook(idBookToDelete);
+    setIsDeleteModalOpen(true);
   }
+
+  const confirmDeleteBook = () => {
+    useDeleteBook(idBookToDelete);
+  };
+
+  const cancelDeleteBook = () => {
+    setIsDeleteModalOpen(false);
+  };
 
   const { useBookById } = useBookByIdProviders();
   const { book, load } = useBookById();
+
+  const breadcrumbItems = [
+    { text: "Accueil", href: "/" },
+    { text: "Livres", href: "/books" },
+    {text: `${book.name}`, href: `/books/${book.id}`}
+  ];
+
 
   useEffect(() => {
     console.log("Books page loaded")
@@ -31,6 +49,7 @@ const BooksDetailsPage: React.FC = () => {
 
         <div className='flex flex-col gap-y-10'>
           <Header />
+          <Breadcrumb items={breadcrumbItems} />
           <div className='w-full flex items-center justify-center'>
             <img src={book?.author?.photoUrl} alt='' className='w-82 h-96 rounded-full object-cover' />
           </div>
@@ -38,8 +57,8 @@ const BooksDetailsPage: React.FC = () => {
         </div>
 
         <span className="text-center"><Title content={`${book.name || ''}`} /></span>       
-        <span className="text-center"> <Title content={`${book?.author?.firstName || ''} ${book?.author?.lastName || ''}`} /></span>
-        <span className="text-center"> <Title content={`${book.genres || ''}`} /></span>
+        <p className='font-outfit font-semibold text-gray-project text-center'> {`${book?.author?.firstName || ''} ${book?.author?.lastName || ''}`}</p>
+        <p className='font-outfit font-semibold text-gray-project text-center'> {`${book?.genres || ''}`}</p>
 
 
         <div className="text-center">
@@ -48,6 +67,12 @@ const BooksDetailsPage: React.FC = () => {
                 <button onClick={handleDeleteBook} className="text-red-500 px-4 py-2 rounded-md">SUPPRIMER</button>
               </div>
             </div>
+            <ConfirmDeleteBookModal
+            isOpen={isDeleteModalOpen}
+            bookName={book.name || ''}
+            onConfirm={confirmDeleteBook}
+            onCancel={cancelDeleteBook}
+          />
         </div>
 
       </div>

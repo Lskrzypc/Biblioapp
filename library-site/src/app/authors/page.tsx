@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Header, Title, AddAuthorModal } from '@/components';
+import { Header, Title, AddAuthorModal, Breadcrumb } from '@/components';
 import { useAuthorsProviders } from '@/hooks/providers/authorProviders';
 
 const AuthorsPage: React.FC = () => {
@@ -30,10 +30,17 @@ const AuthorsPage: React.FC = () => {
     return fullName.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
+  const breadcrumbItems = [
+    { text: "Accueil", href: "/" },
+    { text: "Auteurs", href: "/authors" }
+  ];
+
   // Affichage de la page
   return (
     <div className="flex flex-col gap-y-10">
       <Header />
+      <Breadcrumb items={breadcrumbItems} />
+      
       <span className="pl-6">
         <Title content="Les Auteurs :" />
       </span>
