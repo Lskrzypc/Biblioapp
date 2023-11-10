@@ -1,8 +1,8 @@
-import { Author } from "library-api/src/entities";
-import {PlainAuthorRepositoryOutput} from "./author.repository.type";
+import { Author } from 'library-api/src/entities';
+import { PlainAuthorRepositoryOutput } from './author.repository.type';
 
 export const adaptAuthorEntityToPlainAuthorModel = (
-    author: Author,
+  author: Author,
 ): PlainAuthorRepositoryOutput => ({
-    ...author,
+  ...author,
 });

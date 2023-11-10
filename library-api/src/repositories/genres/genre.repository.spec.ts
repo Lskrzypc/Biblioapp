@@ -18,66 +18,70 @@ describe('GenreRepository', () => {
       expect(findSpy).toHaveBeenCalledTimes(1);
       expect(findSpy).toHaveBeenCalledWith({ relations: { bookGenres: true } });
 
-      expect(result).toEqual((genres));
+      expect(result).toEqual(genres);
     });
-    it("should return an empty array, if no genres are stored", async () => {
-        const dataSource = {
-            createEntityManager: jest.fn(),
-        } as unknown as DataSource;
-        const repository = new GenreRepository(dataSource);
+    it('should return an empty array, if no genres are stored', async () => {
+      const dataSource = {
+        createEntityManager: jest.fn(),
+      } as unknown as DataSource;
+      const repository = new GenreRepository(dataSource);
 
-        const genres = [];
+      const genres = [];
 
-        const findSpy = jest.spyOn(repository, 'find').mockResolvedValue(genres);
+      const findSpy = jest.spyOn(repository, 'find').mockResolvedValue(genres);
 
-        const result = await repository.getAllGenre();
+      const result = await repository.getAllGenre();
 
-        expect(findSpy).toHaveBeenCalledTimes(1);
-        expect(findSpy).toHaveBeenCalledWith({
-            relations: {
-                bookGenres: true,
-            },
-        });
+      expect(findSpy).toHaveBeenCalledTimes(1);
+      expect(findSpy).toHaveBeenCalledWith({
+        relations: {
+          bookGenres: true,
+        },
+      });
 
-        expect(result).toStrictEqual(genres);
-    })
+      expect(result).toStrictEqual(genres);
+    });
   });
 
   describe('getGenreById', () => {
-    it ("should return a genre by its ID", async () => {
-        const dataSource = {
-            createEntityManager: jest.fn(),
-        } as unknown as DataSource;
-        const repository = new GenreRepository(dataSource);
+    it('should return a genre by its ID', async () => {
+      const dataSource = {
+        createEntityManager: jest.fn(),
+      } as unknown as DataSource;
+      const repository = new GenreRepository(dataSource);
 
-        const genre = genreFixture();
-        const findOneSpy = jest.spyOn(repository, 'findOne').mockResolvedValue(genre);
+      const genre = genreFixture();
+      const findOneSpy = jest
+        .spyOn(repository, 'findOne')
+        .mockResolvedValue(genre);
 
-        const result = await repository.getGenreById(genre.id);
+      const result = await repository.getGenreById(genre.id);
 
-        expect(findOneSpy).toHaveBeenCalledTimes(1);
-        expect(findOneSpy).toHaveBeenCalledWith({ where: { id: genre.id } });
+      expect(findOneSpy).toHaveBeenCalledTimes(1);
+      expect(findOneSpy).toHaveBeenCalledWith({ where: { id: genre.id } });
 
-        expect(result).toEqual(genre);
-    })
-  })
+      expect(result).toEqual(genre);
+    });
+  });
 
-  describe ('deleteGenre', () => {
-    it ("should delete a genre by its ID", async () => {
-        const dataSource = {
-            createEntityManager: jest.fn(),
-        } as unknown as DataSource;
-        const repository = new GenreRepository(dataSource);
+  describe('deleteGenre', () => {
+    it('should delete a genre by its ID', async () => {
+      const dataSource = {
+        createEntityManager: jest.fn(),
+      } as unknown as DataSource;
+      const repository = new GenreRepository(dataSource);
 
-        const genre = genreFixture();
-        const findOneSpy = jest.spyOn(repository, 'findOne').mockResolvedValue(genre);
+      const genre = genreFixture();
+      jest.spyOn(repository, 'getGenreById').mockResolvedValue(genre);
+      jest.spyOn(repository, 'delete').mockResolvedValue(undefined);
 
-        const result = await repository.getGenreById(genre.id);
+      await expect(repository.deleteGenre(genre.id)).resolves.toBeUndefined();
 
-        expect(findOneSpy).toHaveBeenCalledTimes(1);
-        expect(findOneSpy).toHaveBeenCalledWith({ where: { id: genre.id } });
+      expect(repository.getGenreById).toHaveBeenCalledTimes(1);
+      expect(repository.getGenreById).toHaveBeenCalledWith(genre.id);
 
-        expect(result).toEqual(genre);
-    })
-  })
+      expect(repository.delete).toHaveBeenCalledTimes(1);
+      expect(repository.delete).toHaveBeenCalledWith(genre);
+    });
+  });
 });
