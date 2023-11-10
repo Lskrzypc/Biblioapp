@@ -1,31 +1,31 @@
 /* eslint-disable import/no-cycle */
 import {
-  BaseEntity,
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
+    BaseEntity,
+    Column,
+    Entity,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
 } from 'typeorm';
-import { BookGenre } from './BookGenre';
-import { Author } from './Author';
+import {BookGenre} from './BookGenre';
+import {Author} from './Author';
 
 export type BookId = string & { __brand: 'Book' };
 
 @Entity('Books')
 export class Book extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: BookId;
+    @PrimaryGeneratedColumn('uuid')
+    id: BookId;
 
-  @Column()
-  name: string;
+    @Column()
+    name: string;
 
-  @Column({ type: 'date' })
-  writtenOn: Date;
+    @Column({type: 'date'})
+    writtenOn: Date;
 
-  @ManyToOne(() => Author, (author) => author.books, { onDelete: 'CASCADE' })
-  author: Author;
+    @ManyToOne(() => Author, (author) => author.books, {onDelete: 'CASCADE'})
+    author: Author;
 
-  @OneToMany(() => BookGenre, (bookGenre) => bookGenre.book)
-  bookGenres: BookGenre[];
+    @OneToMany(() => BookGenre, (bookGenre) => bookGenre.book)
+    bookGenres: BookGenre[];
 }

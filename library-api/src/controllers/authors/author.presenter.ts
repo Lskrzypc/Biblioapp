@@ -19,15 +19,12 @@ export class PlainAuthorPresenter {
       id: data.id,
       firstName: data.firstName,
       lastName: data.lastName,
-      photoUrl: data.photoUrl
-      
+      photoUrl: data.photoUrl,
     });
   }
-  
-  
 }
 
-export class AuthorPresenter{
+export class AuthorPresenter {
   firstName: string;
 
   lastName: string;
@@ -39,7 +36,7 @@ export class AuthorPresenter{
   public static from(data: PlainAuthorModel): AuthorPresenter {
     return new AuthorPresenter({
       firstName: data.firstName,
-      lastName: data.lastName
+      lastName: data.lastName,
     });
   }
 }

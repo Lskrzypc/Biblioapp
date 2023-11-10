@@ -1,29 +1,27 @@
-import { IsInt, IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
-export class CreateAuthorDto{
-    @IsString()
-    firstName: string;
+export class CreateAuthorDto {
+  @IsString()
+  firstName: string;
 
-    @IsString()
-    lastName: string;
+  @IsString()
+  lastName: string;
 
-    @IsOptional()
-    @IsString()
-    photoUrl?: string;
+  @IsOptional()
+  @IsString()
+  photoUrl?: string;
 }
 
-export class UpdateAuthorDto{
+export class UpdateAuthorDto {
+  @IsOptional()
+  @IsString()
+  firstName?: string;
 
-    @IsOptional()
-    @IsString()
-    firstName?: string;
-    
-    @IsOptional()
-    @IsString()
-    lastName?: string;
+  @IsOptional()
+  @IsString()
+  lastName?: string;
 
-    @IsOptional()
-    @IsString()
-    photoUrl?: string;
-
+  @IsOptional()
+  @IsString()
+  photoUrl?: string;
 }

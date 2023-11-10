@@ -2,24 +2,23 @@ import { GenreId } from 'library-api/src/entities';
 import { GenreModel } from 'library-api/src/models';
 
 export class PlainGenrePresenter {
-    id: GenreId;
+  id: GenreId;
 
-    name: string;
+  name: string;
 
-    private constructor(data: PlainGenrePresenter) {
-        Object.assign(this, data);
-    }
+  private constructor(data: PlainGenrePresenter) {
+    Object.assign(this, data);
+  }
 
-    public static from(data: GenreModel): PlainGenrePresenter {
-        return new PlainGenrePresenter({
-        id: data.id,
-        name: data.name,
-        });
-    }
+  public static from(data: GenreModel): PlainGenrePresenter {
+    return new PlainGenrePresenter({
+      id: data.id,
+      name: data.name,
+    });
+  }
 }
 
 export class GenrePresenter {
-
   name: string;
 
   private constructor(data: GenrePresenter) {
