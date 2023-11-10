@@ -2,10 +2,10 @@
 
 import { Title, Header } from '@/components';
 import { useParams } from 'next/navigation';
-import React, { useEffect } from 'react';
+import { useEffect, FC } from 'react';
 import { useBookByIdProviders, useDeleteBook } from '@/hooks';
 
-const BooksDetailsPage: React.FC = () => {
+const BooksDetailsPage: FC = () => {
   const { id } = useParams();
 
   const idBookToDelete: string = id.toString();

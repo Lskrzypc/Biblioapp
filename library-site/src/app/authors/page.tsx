@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { Header, Title, AddAuthorModal } from '@/components';
 import { useAuthorsProviders } from '@/hooks/providers/authorProviders';
 
-const AuthorsPage: React.FC = () => {
+const AuthorsPage: FC = () => {
   // Variables d'état : pour la barre de recherche et pour l'ouverture de la modale
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);

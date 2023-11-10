@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { Header, Title, AddBookModal } from '@/components';
 import { useBooksProviders } from '@/hooks';
 
 
-const BooksPage: React.FC = () => {
+const BooksPage: FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 

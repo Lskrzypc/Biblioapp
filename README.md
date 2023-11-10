@@ -1,10 +1,10 @@
 # PROJET EXAMEN M1 
 
 # Auteurs : 
-- SKRZYPCZAK Louis (As a full-stack developper)
+- SKRZYPCZAK Louis (Fullstack)
 - RENOUVIN--DELECOURT Alexandra (Backend)
 - DJELALI Célia (Front-end)
-- LAFONT Arthur (Full-stack)
+- LAFONT Arthur (Backend)
 - COCHET Mélodie (Front-end)
 
 ######################## 

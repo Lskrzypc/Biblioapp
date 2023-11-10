@@ -1,13 +1,13 @@
 'use client';
 
-import React, {useEffect } from 'react';
+import { useEffect, FC } from 'react';
 import { useParams } from 'next/navigation';
 import { Header, Title } from '@/components';
 import { useDeleteAuthor, useAuthorByIdProviders } from '@/hooks';
 
 
 
-const AuthorDetailsPage: React.FC = () => {
+const AuthorDetailsPage: FC = () => {
   const { id } = useParams();
   
   const idAuthorToDelete: string = id.toString();
@@ -50,10 +50,7 @@ const AuthorDetailsPage: React.FC = () => {
             </div>
           </div>
         </div>
-
-
-
-
+        
       ) : (
         <Title content="Chargement..." />
       )}
