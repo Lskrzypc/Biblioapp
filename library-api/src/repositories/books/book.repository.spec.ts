@@ -1,7 +1,7 @@
 import {DataSource} from "typeorm";
 import {BookRepository} from "./book.repository";
-import {bookFixture} from "../../fixtures/book.fixture";
-import {adaptBookEntityToPlainBookModel} from "./book.utils";
+import {bookFixture} from "../../fixtures";
+import {adaptBookEntityToBookModel, adaptBookEntityToPlainBookModel} from "./book.utils";
 
 describe("bookRpository", () => {
     describe("getAllPlain", () => {
@@ -27,6 +27,28 @@ describe("bookRpository", () => {
 
             expect(result).toStrictEqual(books.map(adaptBookEntityToPlainBookModel));
         });
+        it('should return an empty array, if no books are stored', async () => {
+            const dataSource = {
+                createEntityManager: jest.fn(),
+            } as unknown as DataSource;
+            const repository = new BookRepository(dataSource);
+
+            const books = [];
+
+            const findSpy = jest.spyOn(repository, 'find').mockResolvedValue(books);
+
+            const result = await repository.getAllPlain();
+
+            expect(findSpy).toHaveBeenCalledTimes(1);
+            expect(findSpy).toHaveBeenCalledWith({
+                relations: {
+                    bookGenres: {genre: true},
+                    author: true,
+                },
+            });
+
+            expect(result).toStrictEqual(books);
+        });
     });
 
     describe("getById", () => {
@@ -49,7 +71,8 @@ describe("bookRpository", () => {
                     bookGenres: {genre: true},
                     author: true,
                 }
-            })
+            });
+            expect(result).toStrictEqual(adaptBookEntityToBookModel(book));
         })
     })
 
@@ -73,7 +96,8 @@ describe("bookRpository", () => {
                     bookGenres: {genre: true},
                     author: true,
                 }
-            })
+            });
+            expect(result).toStrictEqual(adaptBookEntityToPlainBookModel(book));
         })
     })
 
@@ -97,7 +121,8 @@ describe("bookRpository", () => {
                     bookGenres: {genre: true},
                     author: true,
                 }
-            })
+            });
+            expect(result).toStrictEqual(adaptBookEntityToPlainBookModel(book));
         })
     })
 });
