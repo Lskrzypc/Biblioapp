@@ -33,6 +33,15 @@ npm run api:start:dev
 #### Précisions :
 Les genres les plus usuels (tels que Roman, Nouvelle, Poésie, Autobiographie...) ont été ajoutés à la base de données à l’aide de requêtes sur Postman.
 
+#### Tests unitaires : 
+Pour lancer les tests unitaires, veuillez entrer la commande suivante : 
+```bash
+npm run api:test
+```
+Si vous souhaitez connaître le pourcentage de fichiers et de lignes testés, veuillez entrer : 
+```bash
+jest --coverage
+```
 ## Déroulement du projet
 
 
