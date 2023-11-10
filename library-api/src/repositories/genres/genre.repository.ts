@@ -1,9 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { Genre, GenreId } from 'library-api/src/entities';
 import { DataSource, Repository } from 'typeorm';
-import {GenreRepositoryInput, GenreRepositoryOutput} from "./genre.repository.type";
-import {adaptGenreEntityToPlainGenreModel} from "./genre.utils";
+import { Injectable } from '@nestjs/common';
 import { v4 } from 'uuid';
+import { Genre, GenreId } from '../../entities';
+import {
+  GenreRepositoryInput,
+  GenreRepositoryOutput,
+} from './genre.repository.type';
+import { adaptGenreEntityToPlainGenreModel } from './genre.utils';
 
 @Injectable()
 export class GenreRepository extends Repository<Genre> {
@@ -15,9 +18,9 @@ export class GenreRepository extends Repository<Genre> {
    * Get all genres
    * @returns Array of genres
    */
-  public async getAllGenre() : Promise<GenreRepositoryOutput[]> {
+  public async getAllGenre(): Promise<GenreRepositoryOutput[]> {
     const genres = await this.find({
-      relations: {bookGenres: true},
+      relations: { bookGenres: true },
     });
     return genres.map(adaptGenreEntityToPlainGenreModel);
   }
@@ -35,14 +38,15 @@ export class GenreRepository extends Repository<Genre> {
     return adaptGenreEntityToPlainGenreModel(genre);
   }
 
-
   /**
    * Create a new genre
    * @param input
    * @returns The created genre
    */
 
-    public async createGenre(input: GenreRepositoryInput) : Promise<GenreRepositoryInput> {
+  public async createGenre(
+    input: GenreRepositoryInput,
+  ): Promise<GenreRepositoryInput> {
     const id = await this.dataSource.transaction(async (manager) => {
       const genre = this.create({
         id: v4(),
@@ -52,16 +56,16 @@ export class GenreRepository extends Repository<Genre> {
       return genre.id;
     });
     return this.getGenreById(id);
-    }
+  }
 
-    /**
-     * Delete a genre by its ID
-     * @param id Genre's ID of type GenreId
-     * @returns void
-     */
-    public async deleteGenre(id: GenreId): Promise<void> {
+  /**
+   * Delete a genre by its ID
+   * @param id Genre's ID of type GenreId
+   * @returns void
+   */
+  public async deleteGenre(id: GenreId): Promise<void> {
     const genre = await this.getGenreById(id);
     if (!genre) throw new Error(`Genre - '${id}'`);
     await this.delete(genre);
-    }
+  }
 }

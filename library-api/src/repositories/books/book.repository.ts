@@ -1,27 +1,17 @@
-import {
-  ConflictException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import {
-  Author,
-  Book,
-  BookGenre,
-  BookId,
-  Genre,
-} from 'library-api/src/entities';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import {
   BookRepositoryOutput,
   PlainBookRepositoryOutput,
   CreateBookRepositoryInput,
   UpdateBookRepositoryInput,
 } from 'library-api/src/repositories/books/book.repository.type';
+import { DataSource, Repository, In } from 'typeorm';
+import { v4 } from 'uuid';
 import {
   adaptBookEntityToBookModel,
   adaptBookEntityToPlainBookModel,
-} from 'library-api/src/repositories/books/book.utils';
-import { DataSource, Repository, In } from 'typeorm';
-import { v4 } from 'uuid';
+} from './book.utils';
+import { Author, Book, BookGenre, BookId, Genre } from '../../entities';
 
 @Injectable()
 export class BookRepository extends Repository<Book> {
@@ -86,7 +76,6 @@ export class BookRepository extends Repository<Book> {
   public async createBook(
     input: CreateBookRepositoryInput,
   ): Promise<PlainBookRepositoryOutput> {
-
     const id = await this.dataSource.transaction(async (manager) => {
       const book = await manager.save<Book>(
         manager.create<Book>(Book, {
@@ -98,7 +87,7 @@ export class BookRepository extends Repository<Book> {
 
       if (input.genres && input.genres.length > 0) {
         await manager.delete<BookGenre>(BookGenre, { book: { id: book.id } });
-       
+
         const newGenres = await manager.find<Genre>(Genre, {
           where: {
             name: In(input.genres),
@@ -134,7 +123,6 @@ export class BookRepository extends Repository<Book> {
             lastName: input.author.lastName,
           },
         });
-        // Si l'auteur n'existe pas, on supprime le livre et on renvoie une erreur -> Il faudra créer l'auteur avant de créer le livre
         if (!author) {
           await manager.delete<Book>(Book, { id: book.id });
           throw new NotFoundException(
@@ -166,13 +154,12 @@ export class BookRepository extends Repository<Book> {
     await this.dataSource.transaction(async (manager) => {
       if (input.genres) {
         await manager.delete<BookGenre>(BookGenre, { book: { id } });
-        
+
         const newGenres = await manager.find<Genre>(Genre, {
           where: {
             name: In(input.genres),
           },
         });
-        // Vérification que tous les genres ont été trouvés dans la base de données et on renvoie une erreur si ce n'est pas le cas
         if (newGenres.length !== input.genres.length) {
           throw new NotFoundException(
             `Genre - '${input.genres.filter(
