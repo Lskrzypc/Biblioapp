@@ -5,4 +5,4 @@ export const genreFixture = (): Genre =>
   ({
     id: faker.string.uuid() as GenreId,
     name: faker.string.sample(12),
-  }) as unknown as Genre;
+  }) as Genre;
