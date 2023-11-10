@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { Author, AuthorId } from '../../entities'; // Assurez-vous d'importer AuthorId
 import { DataSource, Repository } from 'typeorm';
+import { v4 } from 'uuid';
+import { Author, AuthorId } from '../../entities'; // Assurez-vous d'importer AuthorId
 import {
   CreateAuthorRepositoryInput,
   PlainAuthorRepositoryOutput,
   UpdateAuthorRepositoryInput,
 } from './author.repository.type';
 import { adaptAuthorEntityToPlainAuthorModel } from './author.utils'; // Assurez-vous d'importer le fichier d'adaptation
-import { v4 } from 'uuid';
 
 @Injectable()
 export class AuthorRepository extends Repository<Author> {
@@ -75,7 +75,7 @@ export class AuthorRepository extends Repository<Author> {
       const author = await this.findOne({ where: { id: input.id } });
       if (!author) throw new Error(`Author - '${input.id}'`);
 
-      //Update the author with the input data
+      // Update the author with the input data
       const updatedAuthor = this.create({
         ...author,
         ...input,
@@ -95,7 +95,7 @@ export class AuthorRepository extends Repository<Author> {
    * @throws Error if author not found
    */
   public async deleteById(id: AuthorId): Promise<void> {
-    //Changer la promesse si le front a besoin de changer
+    // Changer la promesse si le front a besoin de changer
     const author = await this.getAuthorById(id);
     if (!author) throw new Error(`Author - '${id}'`);
 

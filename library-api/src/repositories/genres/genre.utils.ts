@@ -1,8 +1,8 @@
-import {Genre} from "../../entities";
-import {GenreRepositoryOutput} from "./genre.repository.type";
+import { Genre } from '../../entities';
+import { GenreRepositoryOutput } from './genre.repository.type';
 
 export const adaptGenreEntityToPlainGenreModel = (
-    genre: Genre,
+  genre: Genre,
 ): GenreRepositoryOutput => ({
-    ...genre,
+  ...genre,
 });

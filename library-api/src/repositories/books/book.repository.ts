@@ -105,13 +105,11 @@ export class BookRepository extends Repository<Book> {
 
         // Relation entre le livre et les genres
         await manager.save<BookGenre>(
-          newGenres.map((genre) =>
-            manager.create<BookGenre>(BookGenre, {
+          newGenres.map((genre) => manager.create<BookGenre>(BookGenre, {
               id: v4(),
               book: { id: book.id },
               genre,
-            }),
-          ),
+            })),
         );
       }
 
@@ -170,13 +168,11 @@ export class BookRepository extends Repository<Book> {
 
         // Création des relations entre le livre et les genres
         await manager.save<BookGenre>(
-          newGenres.map((genre) =>
-            manager.create<BookGenre>(BookGenre, {
+          newGenres.map((genre) => manager.create<BookGenre>(BookGenre, {
               id: v4(),
               book: { id },
               genre,
-            }),
-          ),
+            })),
         );
       }
       if (input.author) {

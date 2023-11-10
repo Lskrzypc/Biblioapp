@@ -1,17 +1,15 @@
-import axios from "axios";
-
+import axios from 'axios';
 
 export const useDeleteAuthor = async (id: string): Promise<void> => {
-    try {
-        const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/authors/${id}`);
+  try {
+    const response = await axios.delete(
+      `${process.env.NEXT_PUBLIC_API_URL}/authors/${id}`,
+    );
 
-        window.location.href = '/authors'; 
+    window.location.href = '/authors';
+  } catch (err) {
+    console.error(err);
 
-
-    } catch (err) {
-        console.error(err);
-
-        
-        throw err;
-    }
-}
+    throw err;
+  }
+};

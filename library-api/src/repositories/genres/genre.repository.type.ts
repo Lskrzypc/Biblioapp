@@ -1,4 +1,4 @@
-import {GenreModel} from "../../models";
+import { GenreModel } from '../../models';
 
 export type GenreRepositoryOutput = GenreModel;
-export type GenreRepositoryInput = Omit<GenreModel,"id">;
+export type GenreRepositoryInput = Omit<GenreModel, 'id'>;

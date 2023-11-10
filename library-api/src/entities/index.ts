@@ -4,7 +4,6 @@ import { BookGenre } from './BookGenre';
 import { Genre } from './Genre';
 
 export * from './Author';
-// eslint-disable-next-line import/no-cycle
 export * from './Book';
 export * from './BookGenre';
 export * from './Genre';

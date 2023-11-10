@@ -1,14 +1,18 @@
-import axios from "axios";
-import {CreateBookModel, PlainAuthorModel} from "@/models";
+import axios from 'axios';
+import { CreateBookModel, PlainAuthorModel } from '@/models';
 
 type CreateBookProvider = {
   book: CreateBookModel;
   author: PlainAuthorModel;
 };
 
-export const useCreateBook = async (book: CreateBookModel): Promise<CreateBookProvider> => {
+export const useCreateBook = async (
+  book: CreateBookModel,
+): Promise<CreateBookProvider> => {
   try {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/books`, {
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/books`,
+      {
         name: book.name,
         writtenOn: book.writtenOn,
         author: {
@@ -17,7 +21,7 @@ export const useCreateBook = async (book: CreateBookModel): Promise<CreateBookPr
           lastName: book.author.lastName,
         },
         genres: book.genres,
-      }
+      },
     );
     window.location.href = '/books';
     return response.data;

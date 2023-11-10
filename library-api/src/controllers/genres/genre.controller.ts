@@ -1,16 +1,9 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Post,
-  Body,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GenrePresenter, PlainGenrePresenter } from './genre.presenter';
 import { GenreUseCases } from '../../useCases';
 import { CreateGenreDto } from './genre.dto';
 import { GenreId } from '../../entities';
-import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('genres')
 @Controller('genres')

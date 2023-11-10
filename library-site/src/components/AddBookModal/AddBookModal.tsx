@@ -3,7 +3,7 @@ import { useCreateBook } from '@/hooks/creaters/bookCreaters';
 
 interface AddBookModalProps {
   isOpen: boolean;
-  setIsModalOpen: (isOpen: boolean) => void; 
+  setIsModalOpen: (isOpen: boolean) => void;
 }
 
 const parseDate = (dateString: string) => {
@@ -11,10 +11,13 @@ const parseDate = (dateString: string) => {
   if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
     return new Date(year, month - 1, day); // Mois est 0-indexé, donc soustrayez 1
   }
-  else {return new Date(2000, 5, 5);}
+  return new Date(2000, 5, 5);
 };
 
-export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOpen }) => {
+export const AddBookModal: React.FC<AddBookModalProps> = ({
+  isOpen,
+  setIsModalOpen,
+}) => {
   const [name, setName] = useState('');
   const [writtenOnDate, setWrittenOnDate] = useState('');
   const [authorId, setAuthorId] = useState('');
@@ -22,12 +25,12 @@ export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOp
   const [authorLastName, setAuthorLastName] = useState('');
   const [genres, setGenres] = useState<string[]>([]);
   const [newGenre, setNewGenre] = useState('');
-  
+
   const writtenOn = parseDate(writtenOnDate);
   const bookToCreate = {
     name,
     writtenOn,
-     author: {
+    author: {
       id: authorId,
       firstName: authorFirstName,
       lastName: authorLastName,
@@ -40,27 +43,27 @@ export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOp
     useCreateBook(bookToCreate);
   };
 
-  
-
   const handleAddGenre = () => {
     if (newGenre && !genres.includes(newGenre)) {
-      setGenres(prevGenres => [...prevGenres, newGenre]);
+      setGenres((prevGenres) => [...prevGenres, newGenre]);
       setNewGenre('');
     }
   };
 
   const handleRemoveGenre = (genreToRemove: string) => {
-    setGenres(genres.filter(genre => genre !== genreToRemove));
+    setGenres(genres.filter((genre) => genre !== genreToRemove));
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className={`fixed inset-0 flex items-center justify-center z-50 ${isOpen ? '' : 'hidden'}`}>
+    <div
+      className={`fixed inset-0 flex items-center justify-center z-50 ${
+        isOpen ? '' : 'hidden'
+      }`}
+    >
       <div className="modal bg-white rounded-lg p-6 max-w-lg mx-auto">
         <form onSubmit={handleSubmit}>
-
-
           <div className="mb-4">
             <input
               type="text"
@@ -82,8 +85,6 @@ export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOp
               className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
-
-
 
           <div className="mb-4">
             <input
@@ -115,8 +116,6 @@ export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOp
               className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
-
-
           <div className="mb-4 flex">
             <input
               type="text"
@@ -149,8 +148,19 @@ export const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, setIsModalOp
           </div>
 
           <div className="flex justify-end">
-            <button type="submit" className="bg-green-project text-white px-4 py-2 rounded-md mr-2">Ajouter</button>
-            <button type="button" onClick={() => setIsModalOpen(false)} className="text-red-500 px-4 py-2 rounded-md">Annuler</button>
+            <button
+              type="submit"
+              className="bg-green-project text-white px-4 py-2 rounded-md mr-2"
+            >
+              Ajouter
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(false)}
+              className="text-red-500 px-4 py-2 rounded-md"
+            >
+              Annuler
+            </button>
           </div>
         </form>
       </div>

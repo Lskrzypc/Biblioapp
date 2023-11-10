@@ -1,5 +1,8 @@
-import { Book, BookId } from '../entities';
+/* eslint-disable implicit-arrow-linebreak */
+// Je supprime la règle eslint dans ces fichiers car lorsque
+// je corrige le problème, une autre erreur eslint apparaît.
 import { faker } from '@faker-js/faker';
+import { Book, BookId } from '../entities';
 import { authorFixture } from './author.fixture';
 import { genreFixture } from './genre.fixture';
 

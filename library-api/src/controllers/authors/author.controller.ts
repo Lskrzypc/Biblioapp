@@ -7,11 +7,11 @@ import {
   Patch,
   Delete,
 } from '@nestjs/common';
-import { AuthorPresenter, PlainAuthorPresenter } from './author.presenter';
 import { AuthorId } from 'library-api/src/entities';
 import { AuthorUseCases } from 'library-api/src/useCases';
-import { CreateAuthorDto, UpdateAuthorDto } from './author.dto';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { CreateAuthorDto, UpdateAuthorDto } from './author.dto';
+import { AuthorPresenter, PlainAuthorPresenter } from './author.presenter';
 
 @ApiTags('authors')
 @Controller('authors')
