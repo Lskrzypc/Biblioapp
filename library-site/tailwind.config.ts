@@ -21,6 +21,7 @@ const config: Config = {
         'rose-project': '#CE796B',
         'black-project': '#534D56',
         'green-project': '#5B8C5A',
+        'main-project': '#F2E1C1',
       },
     },
   },

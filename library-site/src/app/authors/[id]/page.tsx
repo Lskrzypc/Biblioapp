@@ -2,15 +2,32 @@
 
 import React, {useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { Header, Title, ConfirmDeleteModal } from '@/components';
+import { Header, Title, Breadcrumb,  ConfirmDeleteModal } from '@/components';
 import { useDeleteAuthor, useAuthorByIdProviders } from '@/hooks';
+
+
 
 const AuthorDetailsPage: React.FC = () => {
   const { id } = useParams();
+ 
   const idAuthorToDelete: string = id.toString();
+
   const { useAuthorById } = useAuthorByIdProviders();
   const { author, load } = useAuthorById();
+
+  const breadcrumbItems = [
+    { text: "Accueil", href: "/" },
+    { text: "Auteurs", href: "/authors" },
+    {text: `${author.firstName} ${author.lastName}`, href: `/authors/${author.id}`}
+  ];
+
+
   useEffect(() => load(idAuthorToDelete), []);
+
+
+  useEffect(() => {
+    console.log("Authors page loaded");
+ }, []);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -30,12 +47,18 @@ const AuthorDetailsPage: React.FC = () => {
     <>
       {author ? (
         <div className='flex flex-col gap-y-8'>
+
           <div className='flex flex-col gap-y-10'>
+         
             <Header />
+            <Breadcrumb items={breadcrumbItems} />
+
             <div className='w-full flex items-center justify-center'>
               <img src={author.photoUrl} alt='' className='w-82 h-96 rounded-full object-cover'></img>
             </div>
+
           </div>
+
           <span className="text-center"><Title content={author.firstName + ' ' + author.lastName} /></span>
           <div className='text-center'>
             <div className='mb-5'>
@@ -51,11 +74,14 @@ const AuthorDetailsPage: React.FC = () => {
             onCancel={cancelDeleteAuthor}
           />
         </div>
+
+
+
+
       ) : (
         <Title content="Chargement..." />
       )}
     </>
   );
 };
-
 export default AuthorDetailsPage;

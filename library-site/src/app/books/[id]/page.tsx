@@ -1,15 +1,15 @@
 'use client';
 
-import { Title, Header, ConfirmDeleteBookModal } from '@/components';
+import { Title, Header, Breadcrumb, ConfirmDeleteBookModal } from '@/components';
 import { useParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState  } from 'react';
 import { useBookByIdProviders, useDeleteBook } from '@/hooks';
+
 
 const BooksDetailsPage: React.FC = () => {
   const { id } = useParams();
 
   const idBookToDelete: string = id.toString();
-
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const handleDeleteBook = () => {
@@ -27,6 +27,13 @@ const BooksDetailsPage: React.FC = () => {
   const { useBookById } = useBookByIdProviders();
   const { book, load } = useBookById();
 
+  const breadcrumbItems = [
+    { text: "Accueil", href: "/" },
+    { text: "Livres", href: "/books" },
+    {text: `${book.name}`, href: `/books/${book.id}`}
+  ];
+
+
   useEffect(() => {
     console.log("Books page loaded")
   }, []);;
@@ -41,14 +48,17 @@ const BooksDetailsPage: React.FC = () => {
 
         <div className='flex flex-col gap-y-10'>
           <Header />
+          <Breadcrumb items={breadcrumbItems} />
           <div className='w-full flex items-center justify-center'>
             <img src={book?.author?.photoUrl} alt='' className='w-82 h-96 rounded-full object-cover' />
           </div>
 
         </div>
 
-        <span className="text-center"><Title content={`${book.name || ''}`} /></span>
-        <p className='font-outfit font-semibold text-gray-project text-center'>{`${book?.author?.firstName || ''} ${book?.author?.lastName || ''}`}</p>
+        <span className="text-center"><Title content={`${book.name || ''}`} /></span>      
+        <p className='font-outfit font-semibold text-gray-project text-center'> {`${book?.author?.firstName || ''} ${book?.author?.lastName || ''}`}</p>
+        <p className='font-outfit font-semibold text-gray-project text-center'> {`${book?.genres || ''}`}</p>
+
 
         <div className="text-center">
             <div className="mb-5">
@@ -64,7 +74,6 @@ const BooksDetailsPage: React.FC = () => {
           />
         </div>
 
-
       </div>
       ) : (
       <Title content="Chargement..." />
@@ -74,5 +83,3 @@ const BooksDetailsPage: React.FC = () => {
 };
 
 export default BooksDetailsPage;
-      
-   

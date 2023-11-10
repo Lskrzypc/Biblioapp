@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Header, Title, AddBookModal } from '@/components';
+import { Header, Title, AddBookModal, Breadcrumb } from '@/components';
 import { useBooksProviders } from '@/hooks';
 
 
@@ -26,6 +26,7 @@ const BooksPage: React.FC = () => {
     const fullName = `${book.name} ${book.author.firstName} ${book.author.lastName} ${book.genres}`;
     return fullName.toLowerCase().includes(searchTerm.toLowerCase());
   });
+
 
   return (
     <div className="flex flex-col gap-y-10">
