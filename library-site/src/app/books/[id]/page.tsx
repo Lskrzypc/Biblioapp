@@ -64,6 +64,11 @@ const BooksDetailsPage: React.FC = () => {
             {' '}
             {`${book?.author?.firstName || ''} ${book?.author?.lastName || ''}`}
           </p>
+          <p className="font-outfit font-semibold text-gray-project text-center">
+            {book?.genres?.map((genre, index) => (
+              <span key={index}>{genre.name}</span>
+            ))}
+          </p>
           <div className="text-center">
             <div className="mb-5">
               <div className="border border-red-500 inline-block">
