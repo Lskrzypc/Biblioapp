@@ -1,0 +1,8 @@
+version: '3'
+services:
+  library-site:
+    build:
+      context: ./library-site
+    ports:
+      - "3000:3000"
+  
