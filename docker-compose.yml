@@ -5,4 +5,13 @@ services:
       context: ./library-site
     ports:
       - "3000:3000"
+    depends_on:
+      - library-api
+  library-api:
+    build:
+      context: ./library-api
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./library-api:/usr/src/app
   

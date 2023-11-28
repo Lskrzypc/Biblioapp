@@ -1,8 +1,8 @@
-import { Book } from 'library-api/src/entities';
+import { Book } from 'src/entities';
 import {
   BookRepositoryOutput,
   PlainBookRepositoryOutput,
-} from 'library-api/src/repositories/books/book.repository.type';
+} from 'src/repositories/books/book.repository.type';
 
 export const adaptBookEntityToPlainBookModel = (
   book: Book,

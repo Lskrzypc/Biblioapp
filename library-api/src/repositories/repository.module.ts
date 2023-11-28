@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AuthorRepository } from 'library-api/src/repositories/authors/author.repository';
-import { BookRepository } from 'library-api/src/repositories/books/book.repository';
-import { GenreRepository } from 'library-api/src/repositories/genres/genre.repository';
+import { AuthorRepository } from 'src/repositories/authors/author.repository';
+import { BookRepository } from 'src/repositories/books/book.repository';
+import { GenreRepository } from 'src/repositories/genres/genre.repository';
 
 const repositories = [AuthorRepository, BookRepository, GenreRepository];
 

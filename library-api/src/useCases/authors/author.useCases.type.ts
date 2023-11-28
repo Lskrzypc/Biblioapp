@@ -1,3 +1,3 @@
-import { PlainAuthorModel } from 'library-api/src/models';
+import { PlainAuthorModel } from 'src/models';
 
 export type PlainBookUseCasesOutput = PlainAuthorModel;

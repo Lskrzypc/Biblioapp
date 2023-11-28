@@ -1,6 +1,6 @@
-import { Author, BookId } from 'library-api/src/entities';
-import { PlainAuthorModel } from 'library-api/src/models/author.model';
-import { GenreModel } from 'library-api/src/models/genre.model';
+import { Author, BookId } from 'src/entities';
+import { PlainAuthorModel } from 'src/models/author.model';
+import { GenreModel } from 'src/models/genre.model';
 
 export type PlainBookModel = {
   id: BookId;

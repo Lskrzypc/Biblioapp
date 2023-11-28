@@ -4,7 +4,7 @@ import {
   PlainBookRepositoryOutput,
   CreateBookRepositoryInput,
   UpdateBookRepositoryInput,
-} from 'library-api/src/repositories/books/book.repository.type';
+} from 'src/repositories/books/book.repository.type';
 import { DataSource, Repository, In } from 'typeorm';
 import { v4 } from 'uuid';
 import {

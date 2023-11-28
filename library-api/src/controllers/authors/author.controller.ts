@@ -7,8 +7,8 @@ import {
   Patch,
   Delete,
 } from '@nestjs/common';
-import { AuthorId } from 'library-api/src/entities';
-import { AuthorUseCases } from 'library-api/src/useCases';
+import { AuthorId } from 'src/entities';
+import { AuthorUseCases } from 'src/useCases';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateAuthorDto, UpdateAuthorDto } from './author.dto';
 import { AuthorPresenter, PlainAuthorPresenter } from './author.presenter';

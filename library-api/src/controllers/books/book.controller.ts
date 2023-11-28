@@ -10,10 +10,10 @@ import {
 import {
   BookPresenter,
   PlainBookPresenter,
-} from 'library-api/src/controllers/books/book.presenter';
-import { BookId } from 'library-api/src/entities';
+} from 'src/controllers/books/book.presenter';
+import { BookId } from 'src/entities';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { BookUseCases } from 'library-api/src/useCases';
+import { BookUseCases } from 'src/useCases';
 import { CreateBookDto, UpdateBookDto } from './book.dto';
 
 @ApiTags('books')

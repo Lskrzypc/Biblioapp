@@ -1,7 +1,7 @@
-import { PlainAuthorPresenter } from 'library-api/src/controllers/authors/author.presenter';
-import { GenrePresenter } from 'library-api/src/controllers/genres/genre.presenter';
-import { BookId } from 'library-api/src/entities';
-import { BookModel, PlainBookModel } from 'library-api/src/models';
+import { PlainAuthorPresenter } from 'src/controllers/authors/author.presenter';
+import { GenrePresenter } from 'src/controllers/genres/genre.presenter';
+import { BookId } from 'src/entities';
+import { BookModel, PlainBookModel } from 'src/models';
 
 export class PlainBookPresenter {
   id: BookId;
